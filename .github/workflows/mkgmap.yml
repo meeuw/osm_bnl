@@ -13,18 +13,6 @@ jobs:
         with:
           path: osmosis-0.48.3.zip
           key: osmosis-0.48.3.zip
-      - name: Cache geofabrik-belgium
-        id: cache-geofabrik-belgium
-        uses: actions/cache@v3
-        with:
-          path: belgium-220708.osm.pbf
-          key: belgium-220708.osm.pbf
-      - name: Cache geofabrik-netherlands
-        id: cache-geofabrik-netherlands
-        uses: actions/cache@v3
-        with:
-          path: netherlands-220708.osm.pbf
-          key: netherlands-220708.osm.pbf
       - name: Cache geofabrik-luxembourg
         id: cache-geofabrik-luxembourg
         uses: actions/cache@v3
@@ -41,8 +29,8 @@ jobs:
         id: cache-sea
         uses: actions/cache@v3
         with:
-          path: sea-20220708001512.zip
-          key: sea-20220708001512.zip
+          path: sea-20220709001512.zip
+          key: sea-20220709001512.zip
       - name: Cache mkgmap
         id: cache-mkgmap
         uses: actions/cache@v3
@@ -79,18 +67,6 @@ jobs:
         with:
           path: 300af0-a3ea25-526ca661d5180.zip
           key: 300af0-a3ea25-526ca661d5180.zip
-      - name: Cache Hoehendaten_Freizeitkarte_BEL
-        id: cache-Hoehendaten_Freizeitkarte_BEL
-        uses: actions/cache@v3
-        with:
-          path: 34765c-5c1046b165020.zip
-          key: 34765c-5c1046b165020.zip
-      - name: Cache Hoehendaten_Freizeitkarte_NLD
-        id: cache-Hoehendaten_Freizeitkarte_NLD
-        uses: actions/cache@v3
-        with:
-          path: 17d90c-5c1046fe2b380.zip
-          key: 17d90c-5c1046fe2b380.zip
       - name: Cache Hoehendaten_Freizeitkarte_LUX
         id: cache-Hoehendaten_Freizeitkarte_LUX
         uses: actions/cache@v3
@@ -107,12 +83,6 @@ jobs:
       - name: Download osmosis
         if: steps.cache-osmosis.outputs.cache-hit != 'true'
         run: wget -O osmosis-0.48.3.zip https://github.com/openstreetmap/osmosis/releases/download/0.48.3/osmosis-0.48.3.zip
-      - name: Download geofabrik-belgium
-        if: steps.cache-geofabrik-belgium.outputs.cache-hit != 'true'
-        run: wget -O belgium-220708.osm.pbf https://download.geofabrik.de/europe/belgium-220708.osm.pbf
-      - name: Download geofabrik-netherlands
-        if: steps.cache-geofabrik-netherlands.outputs.cache-hit != 'true'
-        run: wget -O netherlands-220708.osm.pbf https://download.geofabrik.de/europe/netherlands-220708.osm.pbf
       - name: Download geofabrik-luxembourg
         if: steps.cache-geofabrik-luxembourg.outputs.cache-hit != 'true'
         run: wget -O luxembourg-220708.osm.pbf https://download.geofabrik.de/europe/luxembourg-220708.osm.pbf
@@ -121,7 +91,7 @@ jobs:
         run: wget -O bounds-20220708.zip http://osm.thkukuk.de/data/bounds-20220708.zip
       - name: Download sea
         if: steps.cache-sea.outputs.cache-hit != 'true'
-        run: wget -O sea-20220708001512.zip http://osm.thkukuk.de/data/sea-20220708001512.zip
+        run: wget -O sea-20220709001512.zip http://osm.thkukuk.de/data/sea-20220709001512.zip
       - name: Download mkgmap
         if: steps.cache-mkgmap.outputs.cache-hit != 'true'
         run: wget -O mkgmap-r4904.zip https://www.mkgmap.org.uk/download/mkgmap-r4904.zip
@@ -140,12 +110,6 @@ jobs:
       - name: Download N32
         if: steps.cache-N32.outputs.cache-hit != 'true'
         run: wget -O 300af0-a3ea25-526ca661d5180.zip http://www.viewfinderpanoramas.org/dem3/N32.zip
-      - name: Download Hoehendaten_Freizeitkarte_BEL
-        if: steps.cache-Hoehendaten_Freizeitkarte_BEL.outputs.cache-hit != 'true'
-        run: wget -O 34765c-5c1046b165020.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_BEL.osm.pbf
-      - name: Download Hoehendaten_Freizeitkarte_NLD
-        if: steps.cache-Hoehendaten_Freizeitkarte_NLD.outputs.cache-hit != 'true'
-        run: wget -O 17d90c-5c1046fe2b380.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_NLD.osm.pbf
       - name: Download Hoehendaten_Freizeitkarte_LUX
         if: steps.cache-Hoehendaten_Freizeitkarte_LUX.outputs.cache-hit != 'true'
         run: wget -O b5526-5c1046b4fcecf.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
@@ -157,16 +121,8 @@ jobs:
       - name: Merge extracts
         run: >
           osmosis/bin/osmosis
-          --rbf belgium-220708.osm.pbf
-          --rbf netherlands-220708.osm.pbf
           --rbf luxembourg-220708.osm.pbf
-          --rbf 34765c-5c1046b165020.zip
-          --rbf 17d90c-5c1046fe2b380.zip
           --rbf b5526-5c1046b4fcecf.zip
-          --merge
-          --merge
-          --merge
-          --merge
           --merge
           --wb merged.osm.pbf
       - name: Extract splitter
@@ -200,7 +156,7 @@ jobs:
       - name: Move DEM files
         run: mv map_with_dem_files/???/*.hgt map_with_dem_files/
       - name: Rename sea.zip
-        run: mv sea-20220708001512.zip sea.zip
+        run: mv sea-20220709001512.zip sea.zip
       - name: Rename bounds.zip
         run: mv bounds-20220708.zip bounds.zip
       - name: mkgmap
@@ -213,12 +169,12 @@ jobs:
           -c splitted/template.args
           10010.txt
       - name: Rename sea.zip
-        run: mv sea.zip sea-20220708001512.zip
+        run: mv sea.zip sea-20220709001512.zip
       - name: Rename bounds.zip
         run: mv bounds.zip bounds-20220708.zip
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
-          repo_token: "${{ secrets.PAT }}"
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
           automatic_release_tag: "latest"
           prerelease: false
           files: gmapsupp.img

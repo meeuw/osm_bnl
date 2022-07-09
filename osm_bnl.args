@@ -20,6 +20,7 @@ location-autofill: is_in,nearest
 housenumbers
 x-split-name-index
 latin1
+name-tag-list: name,name:nl,name:fr,name:de,int_name,place_name
 code-page: 1252
 dem: map_with_dem_files
 dem-dists: 9942,9942,9942,13248,44176
