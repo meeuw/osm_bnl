@@ -13,6 +13,18 @@ jobs:
         with:
           path: osmosis-0.48.3.zip
           key: osmosis-0.48.3.zip
+      - name: Cache geofabrik-belgium
+        id: cache-geofabrik-belgium
+        uses: actions/cache@v3
+        with:
+          path: belgium-220708.osm.pbf
+          key: belgium-220708.osm.pbf
+      - name: Cache geofabrik-netherlands
+        id: cache-geofabrik-netherlands
+        uses: actions/cache@v3
+        with:
+          path: netherlands-220708.osm.pbf
+          key: netherlands-220708.osm.pbf
       - name: Cache geofabrik-luxembourg
         id: cache-geofabrik-luxembourg
         uses: actions/cache@v3
@@ -67,6 +79,18 @@ jobs:
         with:
           path: 300af0-a3ea25-526ca661d5180.zip
           key: 300af0-a3ea25-526ca661d5180.zip
+      - name: Cache Hoehendaten_Freizeitkarte_BEL
+        id: cache-Hoehendaten_Freizeitkarte_BEL
+        uses: actions/cache@v3
+        with:
+          path: 34765c-5c1046b165020.zip
+          key: 34765c-5c1046b165020.zip
+      - name: Cache Hoehendaten_Freizeitkarte_NLD
+        id: cache-Hoehendaten_Freizeitkarte_NLD
+        uses: actions/cache@v3
+        with:
+          path: 17d90c-5c1046fe2b380.zip
+          key: 17d90c-5c1046fe2b380.zip
       - name: Cache Hoehendaten_Freizeitkarte_LUX
         id: cache-Hoehendaten_Freizeitkarte_LUX
         uses: actions/cache@v3
@@ -83,6 +107,12 @@ jobs:
       - name: Download osmosis
         if: steps.cache-osmosis.outputs.cache-hit != 'true'
         run: wget -O osmosis-0.48.3.zip https://github.com/openstreetmap/osmosis/releases/download/0.48.3/osmosis-0.48.3.zip
+      - name: Download geofabrik-belgium
+        if: steps.cache-geofabrik-belgium.outputs.cache-hit != 'true'
+        run: wget -O belgium-220708.osm.pbf https://download.geofabrik.de/europe/belgium-220708.osm.pbf
+      - name: Download geofabrik-netherlands
+        if: steps.cache-geofabrik-netherlands.outputs.cache-hit != 'true'
+        run: wget -O netherlands-220708.osm.pbf https://download.geofabrik.de/europe/netherlands-220708.osm.pbf
       - name: Download geofabrik-luxembourg
         if: steps.cache-geofabrik-luxembourg.outputs.cache-hit != 'true'
         run: wget -O luxembourg-220708.osm.pbf https://download.geofabrik.de/europe/luxembourg-220708.osm.pbf
@@ -110,6 +140,12 @@ jobs:
       - name: Download N32
         if: steps.cache-N32.outputs.cache-hit != 'true'
         run: wget -O 300af0-a3ea25-526ca661d5180.zip http://www.viewfinderpanoramas.org/dem3/N32.zip
+      - name: Download Hoehendaten_Freizeitkarte_BEL
+        if: steps.cache-Hoehendaten_Freizeitkarte_BEL.outputs.cache-hit != 'true'
+        run: wget -O 34765c-5c1046b165020.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_BEL.osm.pbf
+      - name: Download Hoehendaten_Freizeitkarte_NLD
+        if: steps.cache-Hoehendaten_Freizeitkarte_NLD.outputs.cache-hit != 'true'
+        run: wget -O 17d90c-5c1046fe2b380.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_NLD.osm.pbf
       - name: Download Hoehendaten_Freizeitkarte_LUX
         if: steps.cache-Hoehendaten_Freizeitkarte_LUX.outputs.cache-hit != 'true'
         run: wget -O b5526-5c1046b4fcecf.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
@@ -121,8 +157,16 @@ jobs:
       - name: Merge extracts
         run: >
           osmosis/bin/osmosis
+          --rbf belgium-220708.osm.pbf
+          --rbf netherlands-220708.osm.pbf
           --rbf luxembourg-220708.osm.pbf
+          --rbf 34765c-5c1046b165020.zip
+          --rbf 17d90c-5c1046fe2b380.zip
           --rbf b5526-5c1046b4fcecf.zip
+          --merge
+          --merge
+          --merge
+          --merge
           --merge
           --wb merged.osm.pbf
       - name: Extract splitter

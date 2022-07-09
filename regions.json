@@ -1,5 +1,5 @@
 {
-    "countries": ["luxembourg"],
+    "countries": ["belgium", "netherlands", "luxembourg"],
     "DEM": ["M31", "M32", "N31", "N32"],
-    "hoehendaten": ["LUX"]
+    "hoehendaten": ["BEL", "NLD", "LUX"]
 }
