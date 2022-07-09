@@ -1,0 +1,26 @@
+name: Update GitHub Action
+on:
+  schedule:
+    - cron: '0 1 * * *'
+  push:
+    branches:
+      - main
+jobs:
+  update-github-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          token: "${{ secrets.PAT }}"
+
+      - name: Install mkgmaps-github-action
+        run: pipx install mkgmaps-github-action
+
+      - name: Run mkgmaps-github-action
+        run: mkgmaps-github-action
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'Update GitHub Action'
