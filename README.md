@@ -33,3 +33,13 @@ This was a bit cumbersome to manage so I created a script to generated the workf
 
 The mkgmaps-github-action is executed by a workflow on a daily timer:
 [.github/workflows/update-github-action.yml](.github/workflows/update-github-action.yml)
+
+All configuration settings for generating the map are included in this repository:
+
+| Configuration | Description |
+| ------------- | ----------- |
+| [regions.json](regions.json) | Input parameters for downloading the map (included countries) |
+| [benelux.poly](benelux.poly) | Bounding polygon of the calculated areas |
+| [10010.txt](10010.txt) | Typ file |
+| [osm_bnl.args](osm_bnl.args) | mkgmap arguments |
+| [/Styles/Openfietsmap full](/Styles/Openfietsmap%20full) | Full style |
