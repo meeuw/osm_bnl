@@ -1,5 +1,8 @@
 name: Generate OpenStreetMap Garmin maps
-on: [push]
+on:
+  push:
+    branches:
+      - main
 jobs:
   mkgmap:
     runs-on: ubuntu-latest
