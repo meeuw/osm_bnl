@@ -2,7 +2,7 @@
 
 ## Download
 
-The generated map can be downloaded here: [gmapsupp.img](releases/tag/latest)
+The generated map can be downloaded from the releases of this project.
 
 ## Used resources
 
