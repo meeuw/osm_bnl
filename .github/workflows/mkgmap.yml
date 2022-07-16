@@ -38,14 +38,14 @@ jobs:
         id: cache-bounds
         uses: actions/cache@v3
         with:
-          path: bounds-20220708.zip
-          key: bounds-20220708.zip
+          path: bounds-20220715.zip
+          key: bounds-20220715.zip
       - name: Cache sea
         id: cache-sea
         uses: actions/cache@v3
         with:
-          path: sea-20220714001530.zip
-          key: sea-20220714001530.zip
+          path: sea-20220715001501.zip
+          key: sea-20220715001501.zip
       - name: Cache mkgmap
         id: cache-mkgmap
         uses: actions/cache@v3
@@ -104,8 +104,8 @@ jobs:
         id: cache-cities15000
         uses: actions/cache@v3
         with:
-          path: 2545e5-5e3ce032ef9dd.zip
-          key: 2545e5-5e3ce032ef9dd.zip
+          path: 254680-5e3e238ec5a0c.zip
+          key: 254680-5e3e238ec5a0c.zip
 
       - name: Download osmosis
         if: steps.cache-osmosis.outputs.cache-hit != 'true'
@@ -121,10 +121,10 @@ jobs:
         run: wget -O luxembourg-220714.osm.pbf https://download.geofabrik.de/europe/luxembourg-220714.osm.pbf
       - name: Download bounds
         if: steps.cache-bounds.outputs.cache-hit != 'true'
-        run: wget -O bounds-20220708.zip http://osm.thkukuk.de/data/bounds-20220708.zip
+        run: wget -O bounds-20220715.zip http://osm.thkukuk.de/data/bounds-20220715.zip
       - name: Download sea
         if: steps.cache-sea.outputs.cache-hit != 'true'
-        run: wget -O sea-20220714001530.zip http://osm.thkukuk.de/data/sea-20220714001530.zip
+        run: wget -O sea-20220715001501.zip http://osm.thkukuk.de/data/sea-20220715001501.zip
       - name: Download mkgmap
         if: steps.cache-mkgmap.outputs.cache-hit != 'true'
         run: wget -O mkgmap-r4905.zip https://www.mkgmap.org.uk/download/mkgmap-r4905.zip
@@ -154,7 +154,7 @@ jobs:
         run: wget -O b5526-5c1046b4fcecf.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
       - name: Download cities15000
         if: steps.cache-cities15000.outputs.cache-hit != 'true'
-        run: wget -O 2545e5-5e3ce032ef9dd.zip http://download.geonames.org/export/dump/cities15000.zip
+        run: wget -O 254680-5e3e238ec5a0c.zip http://download.geonames.org/export/dump/cities15000.zip
       - name: Extract osmosis
         run: unzip -d osmosis osmosis-0.48.3.zip
       - name: Merge extracts
@@ -175,7 +175,7 @@ jobs:
       - name: Extract splitter
         run: unzip -d splitter splitter-r652.zip
       - name: Extract cities
-        run: unzip 2545e5-5e3ce032ef9dd.zip
+        run: unzip 254680-5e3e238ec5a0c.zip
       - name: Splitter
         run: >
           java
@@ -203,9 +203,9 @@ jobs:
       - name: Move DEM files
         run: mv map_with_dem_files/???/*.hgt map_with_dem_files/
       - name: Rename sea.zip
-        run: mv sea-20220714001530.zip sea.zip
+        run: mv sea-20220715001501.zip sea.zip
       - name: Rename bounds.zip
-        run: mv bounds-20220708.zip bounds.zip
+        run: mv bounds-20220715.zip bounds.zip
       - name: mkgmap
         run: >
           java
@@ -216,9 +216,9 @@ jobs:
           -c splitted/template.args
           10010.txt
       - name: Rename sea.zip
-        run: mv sea.zip sea-20220714001530.zip
+        run: mv sea.zip sea-20220715001501.zip
       - name: Rename bounds.zip
-        run: mv bounds.zip bounds-20220708.zip
+        run: mv bounds.zip bounds-20220715.zip
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
           repo_token: "${{ secrets.PAT }}"
