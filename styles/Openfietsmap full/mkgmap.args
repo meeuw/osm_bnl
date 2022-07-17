@@ -9,6 +9,7 @@ area-name: OFM_BNL
 country-name: Benelux
 country-abbr: BNL
 style-file: styles
+style: Openfietsmap full
 overview-mapname: 10010000
 #download the latest sea files from from https://www.mkgmap.org.uk/download/mkgmap.html
 precomp-sea: sea.zip
