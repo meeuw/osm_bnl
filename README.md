@@ -29,9 +29,9 @@ The (generated) GitHub action workflow can be found here:
 It is my intend to use versioned URLs (not "-latest") so files can by properly cached.
 
 This was a bit cumbersome to manage so I created a script to generated the workflow files:
-[https://github.com/meeuw/mkgmaps-github-action](https://github.com/meeuw/mkgmaps-github-action)
+[https://github.com/meeuw/mkgmap-github-action](https://github.com/meeuw/mkgmap-github-action)
 
-The mkgmaps-github-action is executed by a workflow on a daily timer:
+The mkgmap-github-action is executed by a workflow on a daily timer:
 [.github/workflows/update-github-action.yml](.github/workflows/update-github-action.yml)
 
 All configuration settings for generating the map are included in this repository:
@@ -39,7 +39,7 @@ All configuration settings for generating the map are included in this repositor
 | Configuration | Description |
 | ------------- | ----------- |
 | [regions.json](regions.json) | Input parameters for downloading the map (included countries) |
-| [benelux.poly](benelux.poly) | Bounding polygon of the calculated areas |
-| [10010.txt](10010.txt) | Typ file |
-| [osm_bnl.args](osm_bnl.args) | mkgmap arguments |
-| [/Styles/Openfietsmap full](/Styles/Openfietsmap%20full) | Full style |
+| [resources/benelux.poly](resources/benelux.poly) | Bounding polygon of the calculated areas |
+| [typ/Openfietsmap lite/20011.txt](typ/Openfietsmap%20lite/20011.txt) | Typ file |
+| [styles/Openfietsmap full/mkgmap.args](styles/Openfietsmap%20full/mkgmap.args) | mkgmap arguments |
+| [styles/Openfietsmap full](/styles/Openfietsmap%20full) | Full style |
