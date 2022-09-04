@@ -20,14 +20,14 @@ jobs:
         id: cache-geofabrik-belgium
         uses: actions/cache@v3
         with:
-          path: belgium-220902.osm.pbf
-          key: belgium-220902.osm.pbf
+          path: belgium-220903.osm.pbf
+          key: belgium-220903.osm.pbf
       - name: Cache geofabrik-netherlands
         id: cache-geofabrik-netherlands
         uses: actions/cache@v3
         with:
-          path: netherlands-220902.osm.pbf
-          key: netherlands-220902.osm.pbf
+          path: netherlands-220903.osm.pbf
+          key: netherlands-220903.osm.pbf
       - name: Cache geofabrik-luxembourg
         id: cache-geofabrik-luxembourg
         uses: actions/cache@v3
@@ -104,18 +104,18 @@ jobs:
         id: cache-cities15000
         uses: actions/cache@v3
         with:
-          path: 2577b1-5e7bbe056bba6.zip
-          key: 2577b1-5e7bbe056bba6.zip
+          path: 2577e7-5e7d107529387.zip
+          key: 2577e7-5e7d107529387.zip
 
       - name: Download osmosis
         if: steps.cache-osmosis.outputs.cache-hit != 'true'
         run: wget -O osmosis-0.48.3.zip https://github.com/openstreetmap/osmosis/releases/download/0.48.3/osmosis-0.48.3.zip
       - name: Download geofabrik-belgium
         if: steps.cache-geofabrik-belgium.outputs.cache-hit != 'true'
-        run: wget -O belgium-220902.osm.pbf https://download.geofabrik.de/europe/belgium-220902.osm.pbf
+        run: wget -O belgium-220903.osm.pbf https://download.geofabrik.de/europe/belgium-220903.osm.pbf
       - name: Download geofabrik-netherlands
         if: steps.cache-geofabrik-netherlands.outputs.cache-hit != 'true'
-        run: wget -O netherlands-220902.osm.pbf https://download.geofabrik.de/europe/netherlands-220902.osm.pbf
+        run: wget -O netherlands-220903.osm.pbf https://download.geofabrik.de/europe/netherlands-220903.osm.pbf
       - name: Download geofabrik-luxembourg
         if: steps.cache-geofabrik-luxembourg.outputs.cache-hit != 'true'
         run: wget -O luxembourg-220902.osm.pbf https://download.geofabrik.de/europe/luxembourg-220902.osm.pbf
@@ -154,14 +154,14 @@ jobs:
         run: wget -O b5526-5c1046b4fcecf.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
       - name: Download cities15000
         if: steps.cache-cities15000.outputs.cache-hit != 'true'
-        run: wget -O 2577b1-5e7bbe056bba6.zip http://download.geonames.org/export/dump/cities15000.zip
+        run: wget -O 2577e7-5e7d107529387.zip http://download.geonames.org/export/dump/cities15000.zip
       - name: Extract osmosis
         run: unzip -d osmosis osmosis-0.48.3.zip
       - name: Merge extracts
         run: >
           osmosis/bin/osmosis
-          --rbf belgium-220902.osm.pbf
-          --rbf netherlands-220902.osm.pbf
+          --rbf belgium-220903.osm.pbf
+          --rbf netherlands-220903.osm.pbf
           --rbf luxembourg-220902.osm.pbf
           --rbf 34765c-5c1046b165020.zip
           --rbf 17d90c-5c1046fe2b380.zip
@@ -175,7 +175,7 @@ jobs:
       - name: Extract splitter
         run: unzip -d splitter splitter-r652.zip
       - name: Extract cities
-        run: unzip 2577b1-5e7bbe056bba6.zip
+        run: unzip 2577e7-5e7d107529387.zip
       - name: Splitter
         run: >
           java
