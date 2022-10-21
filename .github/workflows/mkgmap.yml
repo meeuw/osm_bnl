@@ -20,20 +20,20 @@ jobs:
         id: cache-geofabrik-belgium
         uses: actions/cache@v3
         with:
-          path: belgium-221019.osm.pbf
-          key: belgium-221019.osm.pbf
+          path: belgium-221020.osm.pbf
+          key: belgium-221020.osm.pbf
       - name: Cache geofabrik-netherlands
         id: cache-geofabrik-netherlands
         uses: actions/cache@v3
         with:
-          path: netherlands-221019.osm.pbf
-          key: netherlands-221019.osm.pbf
+          path: netherlands-221020.osm.pbf
+          key: netherlands-221020.osm.pbf
       - name: Cache geofabrik-luxembourg
         id: cache-geofabrik-luxembourg
         uses: actions/cache@v3
         with:
-          path: luxembourg-221019.osm.pbf
-          key: luxembourg-221019.osm.pbf
+          path: luxembourg-221020.osm.pbf
+          key: luxembourg-221020.osm.pbf
       - name: Cache bounds
         id: cache-bounds
         uses: actions/cache@v3
@@ -44,8 +44,8 @@ jobs:
         id: cache-sea
         uses: actions/cache@v3
         with:
-          path: sea-20221019001527.zip
-          key: sea-20221019001527.zip
+          path: sea-20221020001502.zip
+          key: sea-20221020001502.zip
       - name: Cache mkgmap
         id: cache-mkgmap
         uses: actions/cache@v3
@@ -104,27 +104,27 @@ jobs:
         id: cache-cities15000
         uses: actions/cache@v3
         with:
-          path: 25a093-5eb6d524cb562.zip
-          key: 25a093-5eb6d524cb562.zip
+          path: 25a56f-5eb817015e833.zip
+          key: 25a56f-5eb817015e833.zip
 
       - name: Download osmosis
         if: steps.cache-osmosis.outputs.cache-hit != 'true'
         run: wget -O osmosis-0.48.3.zip https://github.com/openstreetmap/osmosis/releases/download/0.48.3/osmosis-0.48.3.zip
       - name: Download geofabrik-belgium
         if: steps.cache-geofabrik-belgium.outputs.cache-hit != 'true'
-        run: wget -O belgium-221019.osm.pbf https://download.geofabrik.de/europe/belgium-221019.osm.pbf
+        run: wget -O belgium-221020.osm.pbf https://download.geofabrik.de/europe/belgium-221020.osm.pbf
       - name: Download geofabrik-netherlands
         if: steps.cache-geofabrik-netherlands.outputs.cache-hit != 'true'
-        run: wget -O netherlands-221019.osm.pbf https://download.geofabrik.de/europe/netherlands-221019.osm.pbf
+        run: wget -O netherlands-221020.osm.pbf https://download.geofabrik.de/europe/netherlands-221020.osm.pbf
       - name: Download geofabrik-luxembourg
         if: steps.cache-geofabrik-luxembourg.outputs.cache-hit != 'true'
-        run: wget -O luxembourg-221019.osm.pbf https://download.geofabrik.de/europe/luxembourg-221019.osm.pbf
+        run: wget -O luxembourg-221020.osm.pbf https://download.geofabrik.de/europe/luxembourg-221020.osm.pbf
       - name: Download bounds
         if: steps.cache-bounds.outputs.cache-hit != 'true'
         run: wget -O bounds-20221014.zip http://osm.thkukuk.de/data/bounds-20221014.zip
       - name: Download sea
         if: steps.cache-sea.outputs.cache-hit != 'true'
-        run: wget -O sea-20221019001527.zip http://osm.thkukuk.de/data/sea-20221019001527.zip
+        run: wget -O sea-20221020001502.zip http://osm.thkukuk.de/data/sea-20221020001502.zip
       - name: Download mkgmap
         if: steps.cache-mkgmap.outputs.cache-hit != 'true'
         run: wget -O mkgmap-r4905.zip https://www.mkgmap.org.uk/download/mkgmap-r4905.zip
@@ -154,15 +154,15 @@ jobs:
         run: wget -O b5526-5c1046b4fcecf.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
       - name: Download cities15000
         if: steps.cache-cities15000.outputs.cache-hit != 'true'
-        run: wget -O 25a093-5eb6d524cb562.zip http://download.geonames.org/export/dump/cities15000.zip
+        run: wget -O 25a56f-5eb817015e833.zip http://download.geonames.org/export/dump/cities15000.zip
       - name: Extract osmosis
         run: unzip -d osmosis osmosis-0.48.3.zip
       - name: Merge extracts
         run: >
           osmosis/bin/osmosis
-          --rbf belgium-221019.osm.pbf
-          --rbf netherlands-221019.osm.pbf
-          --rbf luxembourg-221019.osm.pbf
+          --rbf belgium-221020.osm.pbf
+          --rbf netherlands-221020.osm.pbf
+          --rbf luxembourg-221020.osm.pbf
           --rbf 34765c-5c1046b165020.zip
           --rbf 17d90c-5c1046fe2b380.zip
           --rbf b5526-5c1046b4fcecf.zip
@@ -175,7 +175,7 @@ jobs:
       - name: Extract splitter
         run: unzip -d splitter splitter-r652.zip
       - name: Extract cities
-        run: unzip 25a093-5eb6d524cb562.zip
+        run: unzip 25a56f-5eb817015e833.zip
       - name: Splitter
         run: >
           java
@@ -203,7 +203,7 @@ jobs:
       - name: Move DEM files
         run: mv map_with_dem_files/???/*.hgt map_with_dem_files/
       - name: Rename sea.zip
-        run: mv sea-20221019001527.zip sea.zip
+        run: mv sea-20221020001502.zip sea.zip
       - name: Rename bounds.zip
         run: mv bounds-20221014.zip bounds.zip
       - name: mkgmap
@@ -216,7 +216,7 @@ jobs:
           -c splitted/template.args
           "typ/Openfietsmap lite/20011.txt"
       - name: Rename sea.zip
-        run: mv sea.zip sea-20221019001527.zip
+        run: mv sea.zip sea-20221020001502.zip
       - name: Rename bounds.zip
         run: mv bounds.zip bounds-20221014.zip
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
