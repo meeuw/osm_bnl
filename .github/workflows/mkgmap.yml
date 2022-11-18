@@ -26,14 +26,14 @@ jobs:
         id: cache-geofabrik-netherlands
         uses: actions/cache@v3
         with:
-          path: netherlands-221116.osm.pbf
-          key: netherlands-221116.osm.pbf
+          path: netherlands-221117.osm.pbf
+          key: netherlands-221117.osm.pbf
       - name: Cache geofabrik-luxembourg
         id: cache-geofabrik-luxembourg
         uses: actions/cache@v3
         with:
-          path: luxembourg-221116.osm.pbf
-          key: luxembourg-221116.osm.pbf
+          path: luxembourg-221117.osm.pbf
+          key: luxembourg-221117.osm.pbf
       - name: Cache bounds
         id: cache-bounds
         uses: actions/cache@v3
@@ -104,8 +104,8 @@ jobs:
         id: cache-cities15000
         uses: actions/cache@v3
         with:
-          path: 25ac93-5eda16b5a0208.zip
-          key: 25ac93-5eda16b5a0208.zip
+          path: 25ac91-5edb59115646d.zip
+          key: 25ac91-5edb59115646d.zip
 
       - name: Download osmosis
         if: steps.cache-osmosis.outputs.cache-hit != 'true'
@@ -115,10 +115,10 @@ jobs:
         run: wget -O belgium-221116.osm.pbf https://download.geofabrik.de/europe/belgium-221116.osm.pbf
       - name: Download geofabrik-netherlands
         if: steps.cache-geofabrik-netherlands.outputs.cache-hit != 'true'
-        run: wget -O netherlands-221116.osm.pbf https://download.geofabrik.de/europe/netherlands-221116.osm.pbf
+        run: wget -O netherlands-221117.osm.pbf https://download.geofabrik.de/europe/netherlands-221117.osm.pbf
       - name: Download geofabrik-luxembourg
         if: steps.cache-geofabrik-luxembourg.outputs.cache-hit != 'true'
-        run: wget -O luxembourg-221116.osm.pbf https://download.geofabrik.de/europe/luxembourg-221116.osm.pbf
+        run: wget -O luxembourg-221117.osm.pbf https://download.geofabrik.de/europe/luxembourg-221117.osm.pbf
       - name: Download bounds
         if: steps.cache-bounds.outputs.cache-hit != 'true'
         run: wget -O bounds-20221111.zip http://osm.thkukuk.de/data/bounds-20221111.zip
@@ -154,15 +154,15 @@ jobs:
         run: wget -O b5526-5c1046b4fcecf.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
       - name: Download cities15000
         if: steps.cache-cities15000.outputs.cache-hit != 'true'
-        run: wget -O 25ac93-5eda16b5a0208.zip http://download.geonames.org/export/dump/cities15000.zip
+        run: wget -O 25ac91-5edb59115646d.zip http://download.geonames.org/export/dump/cities15000.zip
       - name: Extract osmosis
         run: unzip -d osmosis osmosis-0.48.3.zip
       - name: Merge extracts
         run: >
           osmosis/bin/osmosis
           --rbf belgium-221116.osm.pbf
-          --rbf netherlands-221116.osm.pbf
-          --rbf luxembourg-221116.osm.pbf
+          --rbf netherlands-221117.osm.pbf
+          --rbf luxembourg-221117.osm.pbf
           --rbf 34765c-5c1046b165020.zip
           --rbf 17d90c-5c1046fe2b380.zip
           --rbf b5526-5c1046b4fcecf.zip
@@ -175,7 +175,7 @@ jobs:
       - name: Extract splitter
         run: unzip -d splitter splitter-r652.zip
       - name: Extract cities
-        run: unzip 25ac93-5eda16b5a0208.zip
+        run: unzip 25ac91-5edb59115646d.zip
       - name: Splitter
         run: >
           java
