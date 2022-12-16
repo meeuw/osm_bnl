@@ -32,8 +32,8 @@ jobs:
         id: cache-geofabrik-luxembourg
         uses: actions/cache@v3
         with:
-          path: luxembourg-221213.osm.pbf
-          key: luxembourg-221213.osm.pbf
+          path: luxembourg-221214.osm.pbf
+          key: luxembourg-221214.osm.pbf
       - name: Cache bounds
         id: cache-bounds
         uses: actions/cache@v3
@@ -118,7 +118,7 @@ jobs:
         run: wget -O netherlands-221214.osm.pbf https://download.geofabrik.de/europe/netherlands-221214.osm.pbf
       - name: Download geofabrik-luxembourg
         if: steps.cache-geofabrik-luxembourg.outputs.cache-hit != 'true'
-        run: wget -O luxembourg-221213.osm.pbf https://download.geofabrik.de/europe/luxembourg-221213.osm.pbf
+        run: wget -O luxembourg-221214.osm.pbf https://download.geofabrik.de/europe/luxembourg-221214.osm.pbf
       - name: Download bounds
         if: steps.cache-bounds.outputs.cache-hit != 'true'
         run: wget -O bounds-20221209.zip http://osm.thkukuk.de/data/bounds-20221209.zip
@@ -162,7 +162,7 @@ jobs:
           osmosis/bin/osmosis
           --rbf belgium-221214.osm.pbf
           --rbf netherlands-221214.osm.pbf
-          --rbf luxembourg-221213.osm.pbf
+          --rbf luxembourg-221214.osm.pbf
           --rbf 34765c-5c1046b165020.zip
           --rbf 17d90c-5c1046fe2b380.zip
           --rbf b5526-5c1046b4fcecf.zip
