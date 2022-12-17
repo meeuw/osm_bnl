@@ -9,8 +9,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
         with:
-          token: "${{ secrets.PAT }}"
-
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Install mkgmap-github-action
         run: pipx install mkgmap-github-action
 
