@@ -20,3 +20,7 @@ jobs:
         uses: EndBug/add-and-commit@v9
         with:
           message: 'Update GitHub Action'
+          author_name: 'Github Action'
+          author_email: github-action@mrns.nl
+          committer_name: 'Github Action'
+          committer_email: github-action@mrns.nl
