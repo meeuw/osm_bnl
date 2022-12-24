@@ -20,26 +20,26 @@ jobs:
         id: cache-geofabrik-belgium
         uses: actions/cache@v3
         with:
-          path: belgium-221221.osm.pbf
-          key: belgium-221221.osm.pbf
+          path: belgium-221222.osm.pbf
+          key: belgium-221222.osm.pbf
       - name: Cache geofabrik-netherlands
         id: cache-geofabrik-netherlands
         uses: actions/cache@v3
         with:
-          path: netherlands-221221.osm.pbf
-          key: netherlands-221221.osm.pbf
+          path: netherlands-221222.osm.pbf
+          key: netherlands-221222.osm.pbf
       - name: Cache geofabrik-luxembourg
         id: cache-geofabrik-luxembourg
         uses: actions/cache@v3
         with:
-          path: luxembourg-221221.osm.pbf
-          key: luxembourg-221221.osm.pbf
+          path: luxembourg-221222.osm.pbf
+          key: luxembourg-221222.osm.pbf
       - name: Cache bounds
         id: cache-bounds
         uses: actions/cache@v3
         with:
-          path: bounds-20221216.zip
-          key: bounds-20221216.zip
+          path: bounds-20221223.zip
+          key: bounds-20221223.zip
       - name: Cache sea
         id: cache-sea
         uses: actions/cache@v3
@@ -112,16 +112,16 @@ jobs:
         run: wget -O osmosis-0.48.3.zip https://github.com/openstreetmap/osmosis/releases/download/0.48.3/osmosis-0.48.3.zip
       - name: Download geofabrik-belgium
         if: steps.cache-geofabrik-belgium.outputs.cache-hit != 'true'
-        run: wget -O belgium-221221.osm.pbf https://download.geofabrik.de/europe/belgium-221221.osm.pbf
+        run: wget -O belgium-221222.osm.pbf https://download.geofabrik.de/europe/belgium-221222.osm.pbf
       - name: Download geofabrik-netherlands
         if: steps.cache-geofabrik-netherlands.outputs.cache-hit != 'true'
-        run: wget -O netherlands-221221.osm.pbf https://download.geofabrik.de/europe/netherlands-221221.osm.pbf
+        run: wget -O netherlands-221222.osm.pbf https://download.geofabrik.de/europe/netherlands-221222.osm.pbf
       - name: Download geofabrik-luxembourg
         if: steps.cache-geofabrik-luxembourg.outputs.cache-hit != 'true'
-        run: wget -O luxembourg-221221.osm.pbf https://download.geofabrik.de/europe/luxembourg-221221.osm.pbf
+        run: wget -O luxembourg-221222.osm.pbf https://download.geofabrik.de/europe/luxembourg-221222.osm.pbf
       - name: Download bounds
         if: steps.cache-bounds.outputs.cache-hit != 'true'
-        run: wget -O bounds-20221216.zip http://osm.thkukuk.de/data/bounds-20221216.zip
+        run: wget -O bounds-20221223.zip http://osm.thkukuk.de/data/bounds-20221223.zip
       - name: Download sea
         if: steps.cache-sea.outputs.cache-hit != 'true'
         run: wget -O sea-20221212001524.zip http://osm.thkukuk.de/data/sea-20221212001524.zip
@@ -160,9 +160,9 @@ jobs:
       - name: Merge extracts
         run: >
           osmosis/bin/osmosis
-          --rbf belgium-221221.osm.pbf
-          --rbf netherlands-221221.osm.pbf
-          --rbf luxembourg-221221.osm.pbf
+          --rbf belgium-221222.osm.pbf
+          --rbf netherlands-221222.osm.pbf
+          --rbf luxembourg-221222.osm.pbf
           --rbf 34765c-5c1046b165020.zip
           --rbf 17d90c-5c1046fe2b380.zip
           --rbf b5526-5c1046b4fcecf.zip
@@ -205,7 +205,7 @@ jobs:
       - name: Rename sea.zip
         run: mv sea-20221212001524.zip sea.zip
       - name: Rename bounds.zip
-        run: mv bounds-20221216.zip bounds.zip
+        run: mv bounds-20221223.zip bounds.zip
       - name: mkgmap
         run: >
           java
@@ -218,7 +218,7 @@ jobs:
       - name: Rename sea.zip
         run: mv sea.zip sea-20221212001524.zip
       - name: Rename bounds.zip
-        run: mv bounds.zip bounds-20221216.zip
+        run: mv bounds.zip bounds-20221223.zip
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
           repo_token: "${{ secrets.PAT }}"
