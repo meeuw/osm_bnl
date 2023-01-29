@@ -32,8 +32,8 @@ jobs:
         id: cache-geofabrik-luxembourg
         uses: actions/cache@v3
         with:
-          path: luxembourg-230126.osm.pbf
-          key: luxembourg-230126.osm.pbf
+          path: luxembourg-230127.osm.pbf
+          key: luxembourg-230127.osm.pbf
       - name: Cache bounds
         id: cache-bounds
         uses: actions/cache@v3
@@ -104,8 +104,8 @@ jobs:
         id: cache-cities15000
         uses: actions/cache@v3
         with:
-          path: 25bc8a-5f3364ee6b1a5.zip
-          key: 25bc8a-5f3364ee6b1a5.zip
+          path: 25bc8a-5f34a7060a1f4.zip
+          key: 25bc8a-5f34a7060a1f4.zip
 
       - name: Download osmosis
         if: steps.cache-osmosis.outputs.cache-hit != 'true'
@@ -118,7 +118,7 @@ jobs:
         run: wget -O netherlands-230127.osm.pbf https://download.geofabrik.de/europe/netherlands-230127.osm.pbf
       - name: Download geofabrik-luxembourg
         if: steps.cache-geofabrik-luxembourg.outputs.cache-hit != 'true'
-        run: wget -O luxembourg-230126.osm.pbf https://download.geofabrik.de/europe/luxembourg-230126.osm.pbf
+        run: wget -O luxembourg-230127.osm.pbf https://download.geofabrik.de/europe/luxembourg-230127.osm.pbf
       - name: Download bounds
         if: steps.cache-bounds.outputs.cache-hit != 'true'
         run: wget -O bounds-20230127.zip http://osm.thkukuk.de/data/bounds-20230127.zip
@@ -154,7 +154,7 @@ jobs:
         run: wget -O b5526-5c1046b4fcecf.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
       - name: Download cities15000
         if: steps.cache-cities15000.outputs.cache-hit != 'true'
-        run: wget -O 25bc8a-5f3364ee6b1a5.zip http://download.geonames.org/export/dump/cities15000.zip
+        run: wget -O 25bc8a-5f34a7060a1f4.zip http://download.geonames.org/export/dump/cities15000.zip
       - name: Extract osmosis
         run: unzip -d osmosis osmosis-0.48.3.zip
       - name: Merge extracts
@@ -162,7 +162,7 @@ jobs:
           osmosis/bin/osmosis
           --rbf belgium-230127.osm.pbf
           --rbf netherlands-230127.osm.pbf
-          --rbf luxembourg-230126.osm.pbf
+          --rbf luxembourg-230127.osm.pbf
           --rbf 34765c-5c1046b165020.zip
           --rbf 17d90c-5c1046fe2b380.zip
           --rbf b5526-5c1046b4fcecf.zip
@@ -175,7 +175,7 @@ jobs:
       - name: Extract splitter
         run: unzip -d splitter splitter-r653.zip
       - name: Extract cities
-        run: unzip 25bc8a-5f3364ee6b1a5.zip
+        run: unzip 25bc8a-5f34a7060a1f4.zip
       - name: Splitter
         run: >
           java
