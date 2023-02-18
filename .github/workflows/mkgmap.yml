@@ -26,20 +26,20 @@ jobs:
         id: cache-geofabrik-netherlands
         uses: actions/cache@v3
         with:
-          path: netherlands-230216.osm.pbf
-          key: netherlands-230216.osm.pbf
+          path: netherlands-230217.osm.pbf
+          key: netherlands-230217.osm.pbf
       - name: Cache geofabrik-luxembourg
         id: cache-geofabrik-luxembourg
         uses: actions/cache@v3
         with:
-          path: luxembourg-230215.osm.pbf
-          key: luxembourg-230215.osm.pbf
+          path: luxembourg-230217.osm.pbf
+          key: luxembourg-230217.osm.pbf
       - name: Cache bounds
         id: cache-bounds
         uses: actions/cache@v3
         with:
-          path: bounds-20230210.zip
-          key: bounds-20230210.zip
+          path: bounds-20230217.zip
+          key: bounds-20230217.zip
       - name: Cache sea
         id: cache-sea
         uses: actions/cache@v3
@@ -115,13 +115,13 @@ jobs:
         run: wget -O belgium-230216.osm.pbf https://download.geofabrik.de/europe/belgium-230216.osm.pbf
       - name: Download geofabrik-netherlands
         if: steps.cache-geofabrik-netherlands.outputs.cache-hit != 'true'
-        run: wget -O netherlands-230216.osm.pbf https://download.geofabrik.de/europe/netherlands-230216.osm.pbf
+        run: wget -O netherlands-230217.osm.pbf https://download.geofabrik.de/europe/netherlands-230217.osm.pbf
       - name: Download geofabrik-luxembourg
         if: steps.cache-geofabrik-luxembourg.outputs.cache-hit != 'true'
-        run: wget -O luxembourg-230215.osm.pbf https://download.geofabrik.de/europe/luxembourg-230215.osm.pbf
+        run: wget -O luxembourg-230217.osm.pbf https://download.geofabrik.de/europe/luxembourg-230217.osm.pbf
       - name: Download bounds
         if: steps.cache-bounds.outputs.cache-hit != 'true'
-        run: wget -O bounds-20230210.zip http://osm.thkukuk.de/data/bounds-20230210.zip
+        run: wget -O bounds-20230217.zip http://osm.thkukuk.de/data/bounds-20230217.zip
       - name: Download sea
         if: steps.cache-sea.outputs.cache-hit != 'true'
         run: wget -O sea-20230211001502.zip http://osm.thkukuk.de/data/sea-20230211001502.zip
@@ -161,8 +161,8 @@ jobs:
         run: >
           osmosis/bin/osmosis
           --rbf belgium-230216.osm.pbf
-          --rbf netherlands-230216.osm.pbf
-          --rbf luxembourg-230215.osm.pbf
+          --rbf netherlands-230217.osm.pbf
+          --rbf luxembourg-230217.osm.pbf
           --rbf 34765c-5c1046b165020.zip
           --rbf 17d90c-5c1046fe2b380.zip
           --rbf b5526-5c1046b4fcecf.zip
@@ -205,7 +205,7 @@ jobs:
       - name: Rename sea.zip
         run: mv sea-20230211001502.zip sea.zip
       - name: Rename bounds.zip
-        run: mv bounds-20230210.zip bounds.zip
+        run: mv bounds-20230217.zip bounds.zip
       - name: mkgmap
         run: >
           java
@@ -218,7 +218,7 @@ jobs:
       - name: Rename sea.zip
         run: mv sea.zip sea-20230211001502.zip
       - name: Rename bounds.zip
-        run: mv bounds.zip bounds-20230210.zip
+        run: mv bounds.zip bounds-20230217.zip
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
           repo_token: "${{ secrets.PAT }}"
