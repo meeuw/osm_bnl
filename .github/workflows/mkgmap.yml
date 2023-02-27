@@ -32,8 +32,8 @@ jobs:
         id: cache-geofabrik-luxembourg
         uses: actions/cache@v3
         with:
-          path: luxembourg-230225.osm.pbf
-          key: luxembourg-230225.osm.pbf
+          path: luxembourg-230226.osm.pbf
+          key: luxembourg-230226.osm.pbf
       - name: Cache bounds
         id: cache-bounds
         uses: actions/cache@v3
@@ -44,8 +44,8 @@ jobs:
         id: cache-sea
         uses: actions/cache@v3
         with:
-          path: sea-20230225001513.zip
-          key: sea-20230225001513.zip
+          path: sea-20230226001513.zip
+          key: sea-20230226001513.zip
       - name: Cache mkgmap
         id: cache-mkgmap
         uses: actions/cache@v3
@@ -118,13 +118,13 @@ jobs:
         run: wget -O netherlands-230225.osm.pbf https://download.geofabrik.de/europe/netherlands-230225.osm.pbf
       - name: Download geofabrik-luxembourg
         if: steps.cache-geofabrik-luxembourg.outputs.cache-hit != 'true'
-        run: wget -O luxembourg-230225.osm.pbf https://download.geofabrik.de/europe/luxembourg-230225.osm.pbf
+        run: wget -O luxembourg-230226.osm.pbf https://download.geofabrik.de/europe/luxembourg-230226.osm.pbf
       - name: Download bounds
         if: steps.cache-bounds.outputs.cache-hit != 'true'
         run: wget -O bounds-20230224.zip http://osm.thkukuk.de/data/bounds-20230224.zip
       - name: Download sea
         if: steps.cache-sea.outputs.cache-hit != 'true'
-        run: wget -O sea-20230225001513.zip http://osm.thkukuk.de/data/sea-20230225001513.zip
+        run: wget -O sea-20230226001513.zip http://osm.thkukuk.de/data/sea-20230226001513.zip
       - name: Download mkgmap
         if: steps.cache-mkgmap.outputs.cache-hit != 'true'
         run: wget -O mkgmap-r4905.zip https://www.mkgmap.org.uk/download/mkgmap-r4905.zip
@@ -162,7 +162,7 @@ jobs:
           osmosis/bin/osmosis
           --rbf belgium-230225.osm.pbf
           --rbf netherlands-230225.osm.pbf
-          --rbf luxembourg-230225.osm.pbf
+          --rbf luxembourg-230226.osm.pbf
           --rbf 34765c-5c1046b165020.zip
           --rbf 17d90c-5c1046fe2b380.zip
           --rbf b5526-5c1046b4fcecf.zip
@@ -203,7 +203,7 @@ jobs:
       - name: Move DEM files
         run: mv map_with_dem_files/???/*.hgt map_with_dem_files/
       - name: Rename sea.zip
-        run: mv sea-20230225001513.zip sea.zip
+        run: mv sea-20230226001513.zip sea.zip
       - name: Rename bounds.zip
         run: mv bounds-20230224.zip bounds.zip
       - name: mkgmap
@@ -216,7 +216,7 @@ jobs:
           -c splitted/template.args
           "typ/Openfietsmap lite/20011.txt"
       - name: Rename sea.zip
-        run: mv sea.zip sea-20230225001513.zip
+        run: mv sea.zip sea-20230226001513.zip
       - name: Rename bounds.zip
         run: mv bounds.zip bounds-20230224.zip
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
