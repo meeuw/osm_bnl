@@ -38,8 +38,8 @@ jobs:
         id: cache-bounds
         uses: actions/cache@v3
         with:
-          path: bounds-20230602.zip
-          key: bounds-20230602.zip
+          path: bounds-20230609.zip
+          key: bounds-20230609.zip
       - name: Cache sea
         id: cache-sea
         uses: actions/cache@v3
@@ -104,8 +104,8 @@ jobs:
         id: cache-cities15000
         uses: actions/cache@v3
         with:
-          path: 25d4f1-5fd94d9158629.zip
-          key: 25d4f1-5fd94d9158629.zip
+          path: 25d51f-5fda910b5761b.zip
+          key: 25d51f-5fda910b5761b.zip
 
       - name: Download osmosis
         if: steps.cache-osmosis.outputs.cache-hit != 'true'
@@ -121,7 +121,7 @@ jobs:
         run: wget -O luxembourg-230608.osm.pbf https://download.geofabrik.de/europe/luxembourg-230608.osm.pbf
       - name: Download bounds
         if: steps.cache-bounds.outputs.cache-hit != 'true'
-        run: wget -O bounds-20230602.zip http://osm.thkukuk.de/data/bounds-20230602.zip
+        run: wget -O bounds-20230609.zip http://osm.thkukuk.de/data/bounds-20230609.zip
       - name: Download sea
         if: steps.cache-sea.outputs.cache-hit != 'true'
         run: wget -O sea-20230607001524.zip http://osm.thkukuk.de/data/sea-20230607001524.zip
@@ -154,7 +154,7 @@ jobs:
         run: wget -O b5526-5c1046b4fcecf.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
       - name: Download cities15000
         if: steps.cache-cities15000.outputs.cache-hit != 'true'
-        run: wget -O 25d4f1-5fd94d9158629.zip http://download.geonames.org/export/dump/cities15000.zip
+        run: wget -O 25d51f-5fda910b5761b.zip http://download.geonames.org/export/dump/cities15000.zip
       - name: Extract osmosis
         run: unzip -d osmosis osmosis-0.48.3.zip
       - name: Merge extracts
@@ -175,7 +175,7 @@ jobs:
       - name: Extract splitter
         run: unzip -d splitter splitter-r653.zip
       - name: Extract cities
-        run: unzip 25d4f1-5fd94d9158629.zip
+        run: unzip 25d51f-5fda910b5761b.zip
       - name: Splitter
         run: >
           java
@@ -205,7 +205,7 @@ jobs:
       - name: Rename sea.zip
         run: mv sea-20230607001524.zip sea.zip
       - name: Rename bounds.zip
-        run: mv bounds-20230602.zip bounds.zip
+        run: mv bounds-20230609.zip bounds.zip
       - name: mkgmap
         run: >
           java
@@ -218,7 +218,7 @@ jobs:
       - name: Rename sea.zip
         run: mv sea.zip sea-20230607001524.zip
       - name: Rename bounds.zip
-        run: mv bounds.zip bounds-20230602.zip
+        run: mv bounds.zip bounds-20230609.zip
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
           repo_token: "${{ secrets.PAT }}"
