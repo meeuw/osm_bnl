@@ -32,8 +32,8 @@ jobs:
         id: cache-geofabrik-luxembourg
         uses: actions/cache@v3
         with:
-          path: luxembourg-230624.osm.pbf
-          key: luxembourg-230624.osm.pbf
+          path: luxembourg-230625.osm.pbf
+          key: luxembourg-230625.osm.pbf
       - name: Cache bounds
         id: cache-bounds
         uses: actions/cache@v3
@@ -44,8 +44,8 @@ jobs:
         id: cache-sea
         uses: actions/cache@v3
         with:
-          path: sea-20230625001525.zip
-          key: sea-20230625001525.zip
+          path: sea-20230626001525.zip
+          key: sea-20230626001525.zip
       - name: Cache mkgmap
         id: cache-mkgmap
         uses: actions/cache@v3
@@ -104,8 +104,8 @@ jobs:
         id: cache-cities15000
         uses: actions/cache@v3
         with:
-          path: 25d868-5feec34fef2c2.zip
-          key: 25d868-5feec34fef2c2.zip
+          path: 25d88b-5ff131a6fff1b.zip
+          key: 25d88b-5ff131a6fff1b.zip
 
       - name: Download osmosis
         if: steps.cache-osmosis.outputs.cache-hit != 'true'
@@ -118,13 +118,13 @@ jobs:
         run: wget -O netherlands-230625.osm.pbf https://download.geofabrik.de/europe/netherlands-230625.osm.pbf
       - name: Download geofabrik-luxembourg
         if: steps.cache-geofabrik-luxembourg.outputs.cache-hit != 'true'
-        run: wget -O luxembourg-230624.osm.pbf https://download.geofabrik.de/europe/luxembourg-230624.osm.pbf
+        run: wget -O luxembourg-230625.osm.pbf https://download.geofabrik.de/europe/luxembourg-230625.osm.pbf
       - name: Download bounds
         if: steps.cache-bounds.outputs.cache-hit != 'true'
         run: wget -O bounds-20230623.zip http://osm.thkukuk.de/data/bounds-20230623.zip
       - name: Download sea
         if: steps.cache-sea.outputs.cache-hit != 'true'
-        run: wget -O sea-20230625001525.zip http://osm.thkukuk.de/data/sea-20230625001525.zip
+        run: wget -O sea-20230626001525.zip http://osm.thkukuk.de/data/sea-20230626001525.zip
       - name: Download mkgmap
         if: steps.cache-mkgmap.outputs.cache-hit != 'true'
         run: wget -O mkgmap-r4909.zip https://www.mkgmap.org.uk/download/mkgmap-r4909.zip
@@ -154,7 +154,7 @@ jobs:
         run: wget -O b5526-5c1046b4fcecf.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
       - name: Download cities15000
         if: steps.cache-cities15000.outputs.cache-hit != 'true'
-        run: wget -O 25d868-5feec34fef2c2.zip http://download.geonames.org/export/dump/cities15000.zip
+        run: wget -O 25d88b-5ff131a6fff1b.zip http://download.geonames.org/export/dump/cities15000.zip
       - name: Extract osmosis
         run: unzip -d osmosis osmosis-0.48.3.zip
       - name: Merge extracts
@@ -162,7 +162,7 @@ jobs:
           osmosis/bin/osmosis
           --rbf belgium-230625.osm.pbf
           --rbf netherlands-230625.osm.pbf
-          --rbf luxembourg-230624.osm.pbf
+          --rbf luxembourg-230625.osm.pbf
           --rbf 34765c-5c1046b165020.zip
           --rbf 17d90c-5c1046fe2b380.zip
           --rbf b5526-5c1046b4fcecf.zip
@@ -175,7 +175,7 @@ jobs:
       - name: Extract splitter
         run: unzip -d splitter splitter-r653.zip
       - name: Extract cities
-        run: unzip 25d868-5feec34fef2c2.zip
+        run: unzip 25d88b-5ff131a6fff1b.zip
       - name: Splitter
         run: >
           java
@@ -203,7 +203,7 @@ jobs:
       - name: Move DEM files
         run: mv map_with_dem_files/???/*.hgt map_with_dem_files/
       - name: Rename sea.zip
-        run: mv sea-20230625001525.zip sea.zip
+        run: mv sea-20230626001525.zip sea.zip
       - name: Rename bounds.zip
         run: mv bounds-20230623.zip bounds.zip
       - name: mkgmap
@@ -216,7 +216,7 @@ jobs:
           -c splitted/template.args
           "typ/Openfietsmap lite/20011.txt"
       - name: Rename sea.zip
-        run: mv sea.zip sea-20230625001525.zip
+        run: mv sea.zip sea-20230626001525.zip
       - name: Rename bounds.zip
         run: mv bounds.zip bounds-20230623.zip
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
