@@ -20,20 +20,20 @@ jobs:
         id: cache-geofabrik-belgium
         uses: actions/cache@v3
         with:
-          path: belgium-230711.osm.pbf
-          key: belgium-230711.osm.pbf
+          path: belgium-230712.osm.pbf
+          key: belgium-230712.osm.pbf
       - name: Cache geofabrik-netherlands
         id: cache-geofabrik-netherlands
         uses: actions/cache@v3
         with:
-          path: netherlands-230711.osm.pbf
-          key: netherlands-230711.osm.pbf
+          path: netherlands-230712.osm.pbf
+          key: netherlands-230712.osm.pbf
       - name: Cache geofabrik-luxembourg
         id: cache-geofabrik-luxembourg
         uses: actions/cache@v3
         with:
-          path: luxembourg-230711.osm.pbf
-          key: luxembourg-230711.osm.pbf
+          path: luxembourg-230713.osm.pbf
+          key: luxembourg-230713.osm.pbf
       - name: Cache bounds
         id: cache-bounds
         uses: actions/cache@v3
@@ -44,8 +44,8 @@ jobs:
         id: cache-sea
         uses: actions/cache@v3
         with:
-          path: sea-20230712001526.zip
-          key: sea-20230712001526.zip
+          path: sea-20230713001526.zip
+          key: sea-20230713001526.zip
       - name: Cache mkgmap
         id: cache-mkgmap
         uses: actions/cache@v3
@@ -112,19 +112,19 @@ jobs:
         run: wget -O osmosis-0.48.3.zip https://github.com/openstreetmap/osmosis/releases/download/0.48.3/osmosis-0.48.3.zip
       - name: Download geofabrik-belgium
         if: steps.cache-geofabrik-belgium.outputs.cache-hit != 'true'
-        run: wget -O belgium-230711.osm.pbf https://download.geofabrik.de/europe/belgium-230711.osm.pbf
+        run: wget -O belgium-230712.osm.pbf https://download.geofabrik.de/europe/belgium-230712.osm.pbf
       - name: Download geofabrik-netherlands
         if: steps.cache-geofabrik-netherlands.outputs.cache-hit != 'true'
-        run: wget -O netherlands-230711.osm.pbf https://download.geofabrik.de/europe/netherlands-230711.osm.pbf
+        run: wget -O netherlands-230712.osm.pbf https://download.geofabrik.de/europe/netherlands-230712.osm.pbf
       - name: Download geofabrik-luxembourg
         if: steps.cache-geofabrik-luxembourg.outputs.cache-hit != 'true'
-        run: wget -O luxembourg-230711.osm.pbf https://download.geofabrik.de/europe/luxembourg-230711.osm.pbf
+        run: wget -O luxembourg-230713.osm.pbf https://download.geofabrik.de/europe/luxembourg-230713.osm.pbf
       - name: Download bounds
         if: steps.cache-bounds.outputs.cache-hit != 'true'
         run: wget -O bounds-20230707.zip http://osm.thkukuk.de/data/bounds-20230707.zip
       - name: Download sea
         if: steps.cache-sea.outputs.cache-hit != 'true'
-        run: wget -O sea-20230712001526.zip http://osm.thkukuk.de/data/sea-20230712001526.zip
+        run: wget -O sea-20230713001526.zip http://osm.thkukuk.de/data/sea-20230713001526.zip
       - name: Download mkgmap
         if: steps.cache-mkgmap.outputs.cache-hit != 'true'
         run: wget -O mkgmap-r4909.zip https://www.mkgmap.org.uk/download/mkgmap-r4909.zip
@@ -160,9 +160,9 @@ jobs:
       - name: Merge extracts
         run: >
           osmosis/bin/osmosis
-          --rbf belgium-230711.osm.pbf
-          --rbf netherlands-230711.osm.pbf
-          --rbf luxembourg-230711.osm.pbf
+          --rbf belgium-230712.osm.pbf
+          --rbf netherlands-230712.osm.pbf
+          --rbf luxembourg-230713.osm.pbf
           --rbf 34765c-5c1046b165020.zip
           --rbf 17d90c-5c1046fe2b380.zip
           --rbf b5526-5c1046b4fcecf.zip
@@ -203,7 +203,7 @@ jobs:
       - name: Move DEM files
         run: mv map_with_dem_files/???/*.hgt map_with_dem_files/
       - name: Rename sea.zip
-        run: mv sea-20230712001526.zip sea.zip
+        run: mv sea-20230713001526.zip sea.zip
       - name: Rename bounds.zip
         run: mv bounds-20230707.zip bounds.zip
       - name: mkgmap
@@ -216,7 +216,7 @@ jobs:
           -c splitted/template.args
           "typ/Openfietsmap lite/20011.txt"
       - name: Rename sea.zip
-        run: mv sea.zip sea-20230712001526.zip
+        run: mv sea.zip sea-20230713001526.zip
       - name: Rename bounds.zip
         run: mv bounds.zip bounds-20230707.zip
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
