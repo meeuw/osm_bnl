@@ -176,6 +176,10 @@ jobs:
         run: unzip -d splitter splitter-r653.zip
       - name: Extract cities
         run: unzip 25ea15-609d78def1dcf.zip
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'oracle'
+          java-version: '17'
       - name: Splitter
         run: >
           java
