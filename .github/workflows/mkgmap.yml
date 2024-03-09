@@ -38,8 +38,8 @@ jobs:
         id: cache-bounds
         uses: actions/cache@v3
         with:
-          path: bounds-20240301.zip
-          key: bounds-20240301.zip
+          path: bounds-20240308.zip
+          key: bounds-20240308.zip
       - name: Cache sea
         id: cache-sea
         uses: actions/cache@v3
@@ -121,7 +121,7 @@ jobs:
         run: wget -O luxembourg-240307.osm.pbf https://download.geofabrik.de/europe/luxembourg-240307.osm.pbf
       - name: Download bounds
         if: steps.cache-bounds.outputs.cache-hit != 'true'
-        run: wget -O bounds-20240301.zip http://osm.thkukuk.de/data/bounds-20240301.zip
+        run: wget -O bounds-20240308.zip http://osm.thkukuk.de/data/bounds-20240308.zip
       - name: Download sea
         if: steps.cache-sea.outputs.cache-hit != 'true'
         run: wget -O sea-20240307001511.zip http://osm.thkukuk.de/data/sea-20240307001511.zip
@@ -209,7 +209,7 @@ jobs:
       - name: Rename sea.zip
         run: mv sea-20240307001511.zip sea.zip
       - name: Rename bounds.zip
-        run: mv bounds-20240301.zip bounds.zip
+        run: mv bounds-20240308.zip bounds.zip
       - name: mkgmap
         run: >
           java
@@ -222,7 +222,7 @@ jobs:
       - name: Rename sea.zip
         run: mv sea.zip sea-20240307001511.zip
       - name: Rename bounds.zip
-        run: mv bounds.zip bounds-20240301.zip
+        run: mv bounds.zip bounds-20240308.zip
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
           repo_token: "${{ secrets.PAT }}"
