@@ -20,26 +20,26 @@ jobs:
         id: cache-geofabrik-belgium
         uses: actions/cache@v3
         with:
-          path: belgium-240403.osm.pbf
-          key: belgium-240403.osm.pbf
+          path: belgium-240404.osm.pbf
+          key: belgium-240404.osm.pbf
       - name: Cache geofabrik-netherlands
         id: cache-geofabrik-netherlands
         uses: actions/cache@v3
         with:
-          path: netherlands-240403.osm.pbf
-          key: netherlands-240403.osm.pbf
+          path: netherlands-240404.osm.pbf
+          key: netherlands-240404.osm.pbf
       - name: Cache geofabrik-luxembourg
         id: cache-geofabrik-luxembourg
         uses: actions/cache@v3
         with:
-          path: luxembourg-240403.osm.pbf
-          key: luxembourg-240403.osm.pbf
+          path: luxembourg-240405.osm.pbf
+          key: luxembourg-240405.osm.pbf
       - name: Cache bounds
         id: cache-bounds
         uses: actions/cache@v3
         with:
-          path: bounds-20240329.zip
-          key: bounds-20240329.zip
+          path: bounds-20240405.zip
+          key: bounds-20240405.zip
       - name: Cache sea
         id: cache-sea
         uses: actions/cache@v3
@@ -56,8 +56,8 @@ jobs:
         id: cache-splitter
         uses: actions/cache@v3
         with:
-          path: splitter-r653.zip
-          key: splitter-r653.zip
+          path: splitter-r654.zip
+          key: splitter-r654.zip
       - name: Cache M31
         id: cache-M31
         uses: actions/cache@v3
@@ -104,24 +104,24 @@ jobs:
         id: cache-cities15000
         uses: actions/cache@v3
         with:
-          path: 29fc74-6153c02e13f8e.zip
-          key: 29fc74-6153c02e13f8e.zip
+          path: 29fed3-61550446f65db.zip
+          key: 29fed3-61550446f65db.zip
 
       - name: Download osmosis
         if: steps.cache-osmosis.outputs.cache-hit != 'true'
         run: wget -O osmosis-0.49.2.zip https://github.com/openstreetmap/osmosis/releases/download/0.49.2/osmosis-0.49.2.zip
       - name: Download geofabrik-belgium
         if: steps.cache-geofabrik-belgium.outputs.cache-hit != 'true'
-        run: wget -O belgium-240403.osm.pbf https://download.geofabrik.de/europe/belgium-240403.osm.pbf
+        run: wget -O belgium-240404.osm.pbf https://download.geofabrik.de/europe/belgium-240404.osm.pbf
       - name: Download geofabrik-netherlands
         if: steps.cache-geofabrik-netherlands.outputs.cache-hit != 'true'
-        run: wget -O netherlands-240403.osm.pbf https://download.geofabrik.de/europe/netherlands-240403.osm.pbf
+        run: wget -O netherlands-240404.osm.pbf https://download.geofabrik.de/europe/netherlands-240404.osm.pbf
       - name: Download geofabrik-luxembourg
         if: steps.cache-geofabrik-luxembourg.outputs.cache-hit != 'true'
-        run: wget -O luxembourg-240403.osm.pbf https://download.geofabrik.de/europe/luxembourg-240403.osm.pbf
+        run: wget -O luxembourg-240405.osm.pbf https://download.geofabrik.de/europe/luxembourg-240405.osm.pbf
       - name: Download bounds
         if: steps.cache-bounds.outputs.cache-hit != 'true'
-        run: wget -O bounds-20240329.zip http://osm.thkukuk.de/data/bounds-20240329.zip
+        run: wget -O bounds-20240405.zip http://osm.thkukuk.de/data/bounds-20240405.zip
       - name: Download sea
         if: steps.cache-sea.outputs.cache-hit != 'true'
         run: wget -O sea-20240401001510.zip http://osm.thkukuk.de/data/sea-20240401001510.zip
@@ -130,7 +130,7 @@ jobs:
         run: wget -O mkgmap-r4919.zip https://www.mkgmap.org.uk/download/mkgmap-r4919.zip
       - name: Download splitter
         if: steps.cache-splitter.outputs.cache-hit != 'true'
-        run: wget -O splitter-r653.zip https://www.mkgmap.org.uk/download/splitter-r653.zip
+        run: wget -O splitter-r654.zip https://www.mkgmap.org.uk/download/splitter-r654.zip
       - name: Download M31
         if: steps.cache-M31.outputs.cache-hit != 'true'
         run: wget -O 114a217-611d29fea4a00.zip https://www.viewfinderpanoramas.org/dem3/M31.zip
@@ -154,7 +154,7 @@ jobs:
         run: wget -O b5526-5c1046b4fcecf.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
       - name: Download cities15000
         if: steps.cache-cities15000.outputs.cache-hit != 'true'
-        run: wget -O 29fc74-6153c02e13f8e.zip http://download.geonames.org/export/dump/cities15000.zip
+        run: wget -O 29fed3-61550446f65db.zip http://download.geonames.org/export/dump/cities15000.zip
       - name: Extract osmosis
         run: unzip -d osmosis osmosis-0.49.2.zip
       - uses: actions/setup-java@v3
@@ -164,9 +164,9 @@ jobs:
       - name: Merge extracts
         run: >
           osmosis/osmosis*/bin/osmosis
-          --rbf belgium-240403.osm.pbf
-          --rbf netherlands-240403.osm.pbf
-          --rbf luxembourg-240403.osm.pbf
+          --rbf belgium-240404.osm.pbf
+          --rbf netherlands-240404.osm.pbf
+          --rbf luxembourg-240405.osm.pbf
           --rbf 34765c-5c1046b165020.zip
           --rbf 17d90c-5c1046fe2b380.zip
           --rbf b5526-5c1046b4fcecf.zip
@@ -177,9 +177,9 @@ jobs:
           --merge
           --wb merged.osm.pbf
       - name: Extract splitter
-        run: unzip -d splitter splitter-r653.zip
+        run: unzip -d splitter splitter-r654.zip
       - name: Extract cities
-        run: unzip 29fc74-6153c02e13f8e.zip
+        run: unzip 29fed3-61550446f65db.zip
       - name: Splitter
         run: >
           java
@@ -209,7 +209,7 @@ jobs:
       - name: Rename sea.zip
         run: mv sea-20240401001510.zip sea.zip
       - name: Rename bounds.zip
-        run: mv bounds-20240329.zip bounds.zip
+        run: mv bounds-20240405.zip bounds.zip
       - name: mkgmap
         run: >
           java
@@ -222,7 +222,7 @@ jobs:
       - name: Rename sea.zip
         run: mv sea.zip sea-20240401001510.zip
       - name: Rename bounds.zip
-        run: mv bounds.zip bounds-20240329.zip
+        run: mv bounds.zip bounds-20240405.zip
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
           repo_token: "${{ secrets.PAT }}"
