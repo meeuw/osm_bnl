@@ -32,8 +32,8 @@ jobs:
         id: cache-geofabrik-luxembourg
         uses: actions/cache@v3
         with:
-          path: luxembourg-240503.osm.pbf
-          key: luxembourg-240503.osm.pbf
+          path: luxembourg-240504.osm.pbf
+          key: luxembourg-240504.osm.pbf
       - name: Cache bounds
         id: cache-bounds
         uses: actions/cache@v3
@@ -104,8 +104,8 @@ jobs:
         id: cache-cities15000
         uses: actions/cache@v3
         with:
-          path: 2a663c-6176f4b7c9c56.zip
-          key: 2a663c-6176f4b7c9c56.zip
+          path: 2a68b6-617ac2558765b.zip
+          key: 2a68b6-617ac2558765b.zip
 
       - name: Download osmosis
         if: steps.cache-osmosis.outputs.cache-hit != 'true'
@@ -118,7 +118,7 @@ jobs:
         run: wget -O netherlands-240504.osm.pbf https://download.geofabrik.de/europe/netherlands-240504.osm.pbf
       - name: Download geofabrik-luxembourg
         if: steps.cache-geofabrik-luxembourg.outputs.cache-hit != 'true'
-        run: wget -O luxembourg-240503.osm.pbf https://download.geofabrik.de/europe/luxembourg-240503.osm.pbf
+        run: wget -O luxembourg-240504.osm.pbf https://download.geofabrik.de/europe/luxembourg-240504.osm.pbf
       - name: Download bounds
         if: steps.cache-bounds.outputs.cache-hit != 'true'
         run: wget -O bounds-20240503.zip http://osm.thkukuk.de/data/bounds-20240503.zip
@@ -154,7 +154,7 @@ jobs:
         run: wget -O b5526-5c1046b4fcecf.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
       - name: Download cities15000
         if: steps.cache-cities15000.outputs.cache-hit != 'true'
-        run: wget -O 2a663c-6176f4b7c9c56.zip http://download.geonames.org/export/dump/cities15000.zip
+        run: wget -O 2a68b6-617ac2558765b.zip http://download.geonames.org/export/dump/cities15000.zip
       - name: Extract osmosis
         run: unzip -d osmosis osmosis-0.49.2.zip
       - uses: actions/setup-java@v3
@@ -166,7 +166,7 @@ jobs:
           osmosis/osmosis*/bin/osmosis
           --rbf belgium-240504.osm.pbf
           --rbf netherlands-240504.osm.pbf
-          --rbf luxembourg-240503.osm.pbf
+          --rbf luxembourg-240504.osm.pbf
           --rbf 34765c-5c1046b165020.zip
           --rbf 17d90c-5c1046fe2b380.zip
           --rbf b5526-5c1046b4fcecf.zip
@@ -179,7 +179,7 @@ jobs:
       - name: Extract splitter
         run: unzip -d splitter splitter-r654.zip
       - name: Extract cities
-        run: unzip 2a663c-6176f4b7c9c56.zip
+        run: unzip 2a68b6-617ac2558765b.zip
       - name: Splitter
         run: >
           java
