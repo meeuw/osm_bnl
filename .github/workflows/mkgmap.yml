@@ -44,14 +44,14 @@ jobs:
         id: cache-sea
         uses: actions/cache@v3
         with:
-          path: sea-20240607001519.zip
-          key: sea-20240607001519.zip
+          path: sea-20240610001519.zip
+          key: sea-20240610001519.zip
       - name: Cache mkgmap
         id: cache-mkgmap
         uses: actions/cache@v3
         with:
-          path: mkgmap-r4919.zip
-          key: mkgmap-r4919.zip
+          path: mkgmap-r4921.zip
+          key: mkgmap-r4921.zip
       - name: Cache splitter
         id: cache-splitter
         uses: actions/cache@v3
@@ -104,8 +104,8 @@ jobs:
         id: cache-cities15000
         uses: actions/cache@v3
         with:
-          path: 2a71cd-61a6c700bc27c.zip
-          key: 2a71cd-61a6c700bc27c.zip
+          path: 2a71e6-61a7fd9766227.zip
+          key: 2a71e6-61a7fd9766227.zip
 
       - name: Download osmosis
         if: steps.cache-osmosis.outputs.cache-hit != 'true'
@@ -124,10 +124,10 @@ jobs:
         run: wget -O bounds-20240607.zip http://osm.thkukuk.de/data/bounds-20240607.zip
       - name: Download sea
         if: steps.cache-sea.outputs.cache-hit != 'true'
-        run: wget -O sea-20240607001519.zip http://osm.thkukuk.de/data/sea-20240607001519.zip
+        run: wget -O sea-20240610001519.zip http://osm.thkukuk.de/data/sea-20240610001519.zip
       - name: Download mkgmap
         if: steps.cache-mkgmap.outputs.cache-hit != 'true'
-        run: wget -O mkgmap-r4919.zip https://www.mkgmap.org.uk/download/mkgmap-r4919.zip
+        run: wget -O mkgmap-r4921.zip https://www.mkgmap.org.uk/download/mkgmap-r4921.zip
       - name: Download splitter
         if: steps.cache-splitter.outputs.cache-hit != 'true'
         run: wget -O splitter-r654.zip https://www.mkgmap.org.uk/download/splitter-r654.zip
@@ -154,7 +154,7 @@ jobs:
         run: wget -O 17dc23-619be709bd89f.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
       - name: Download cities15000
         if: steps.cache-cities15000.outputs.cache-hit != 'true'
-        run: wget -O 2a71cd-61a6c700bc27c.zip http://download.geonames.org/export/dump/cities15000.zip
+        run: wget -O 2a71e6-61a7fd9766227.zip http://download.geonames.org/export/dump/cities15000.zip
       - name: Extract osmosis
         run: unzip -d osmosis osmosis-0.49.2.zip
       - uses: actions/setup-java@v3
@@ -179,7 +179,7 @@ jobs:
       - name: Extract splitter
         run: unzip -d splitter splitter-r654.zip
       - name: Extract cities
-        run: unzip 2a71cd-61a6c700bc27c.zip
+        run: unzip 2a71e6-61a7fd9766227.zip
       - name: Splitter
         run: >
           java
@@ -193,7 +193,7 @@ jobs:
           --polygon-file=resources/benelux.poly
           merged.osm.pbf
       - name: Extract mkgmap
-        run: unzip -d mkgmap mkgmap-r4919.zip
+        run: unzip -d mkgmap mkgmap-r4921.zip
       - name: Extract dem files
         run: >
           for Z in
@@ -207,7 +207,7 @@ jobs:
       - name: Move DEM files
         run: mv map_with_dem_files/???/*.hgt map_with_dem_files/
       - name: Rename sea.zip
-        run: mv sea-20240607001519.zip sea.zip
+        run: mv sea-20240610001519.zip sea.zip
       - name: Rename bounds.zip
         run: mv bounds-20240607.zip bounds.zip
       - name: mkgmap
@@ -220,7 +220,7 @@ jobs:
           -c splitted/template.args
           "typ/Openfietsmap lite/20011.txt"
       - name: Rename sea.zip
-        run: mv sea.zip sea-20240607001519.zip
+        run: mv sea.zip sea-20240610001519.zip
       - name: Rename bounds.zip
         run: mv bounds.zip bounds-20240607.zip
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
