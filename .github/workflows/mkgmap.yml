@@ -20,8 +20,8 @@ jobs:
         id: cache-geofabrik-belgium
         uses: actions/cache@v3
         with:
-          path: belgium-240622.osm.pbf
-          key: belgium-240622.osm.pbf
+          path: belgium-240623.osm.pbf
+          key: belgium-240623.osm.pbf
       - name: Cache geofabrik-netherlands
         id: cache-geofabrik-netherlands
         uses: actions/cache@v3
@@ -104,15 +104,15 @@ jobs:
         id: cache-cities15000
         uses: actions/cache@v3
         with:
-          path: 2a7386-61b48b6ca1466.zip
-          key: 2a7386-61b48b6ca1466.zip
+          path: 2a7460-61b991d35fd8d.zip
+          key: 2a7460-61b991d35fd8d.zip
 
       - name: Download osmosis
         if: steps.cache-osmosis.outputs.cache-hit != 'true'
         run: wget -O osmosis-0.49.2.zip https://github.com/openstreetmap/osmosis/releases/download/0.49.2/osmosis-0.49.2.zip
       - name: Download geofabrik-belgium
         if: steps.cache-geofabrik-belgium.outputs.cache-hit != 'true'
-        run: wget -O belgium-240622.osm.pbf https://download.geofabrik.de/europe/belgium-240622.osm.pbf
+        run: wget -O belgium-240623.osm.pbf https://download.geofabrik.de/europe/belgium-240623.osm.pbf
       - name: Download geofabrik-netherlands
         if: steps.cache-geofabrik-netherlands.outputs.cache-hit != 'true'
         run: wget -O netherlands-240623.osm.pbf https://download.geofabrik.de/europe/netherlands-240623.osm.pbf
@@ -154,7 +154,7 @@ jobs:
         run: wget -O 17dc23-619be709bd89f.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
       - name: Download cities15000
         if: steps.cache-cities15000.outputs.cache-hit != 'true'
-        run: wget -O 2a7386-61b48b6ca1466.zip http://download.geonames.org/export/dump/cities15000.zip
+        run: wget -O 2a7460-61b991d35fd8d.zip http://download.geonames.org/export/dump/cities15000.zip
       - name: Extract osmosis
         run: unzip -d osmosis osmosis-0.49.2.zip
       - uses: actions/setup-java@v3
@@ -164,7 +164,7 @@ jobs:
       - name: Merge extracts
         run: >
           osmosis/osmosis*/bin/osmosis
-          --rbf belgium-240622.osm.pbf
+          --rbf belgium-240623.osm.pbf
           --rbf netherlands-240623.osm.pbf
           --rbf luxembourg-240623.osm.pbf
           --rbf 5c4402-60d7db554f262.zip
@@ -179,7 +179,7 @@ jobs:
       - name: Extract splitter
         run: unzip -d splitter splitter-r654.zip
       - name: Extract cities
-        run: unzip 2a7386-61b48b6ca1466.zip
+        run: unzip 2a7460-61b991d35fd8d.zip
       - name: Splitter
         run: >
           java
