@@ -2,10 +2,10 @@ name: Generate OpenStreetMap Garmin maps
 on:
   push:
     branches:
-      - main
+      - runner-test
 jobs:
   mkgmap:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
