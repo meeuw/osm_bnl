@@ -20,8 +20,8 @@ jobs:
         id: cache-geofabrik-belgium
         uses: actions/cache@v3
         with:
-          path: belgium-250401.osm.pbf
-          key: belgium-250401.osm.pbf
+          path: belgium-250402.osm.pbf
+          key: belgium-250402.osm.pbf
       - name: Cache geofabrik-netherlands
         id: cache-geofabrik-netherlands
         uses: actions/cache@v3
@@ -112,7 +112,7 @@ jobs:
         run: wget -O osmosis-0.49.2.zip https://github.com/openstreetmap/osmosis/releases/download/0.49.2/osmosis-0.49.2.zip
       - name: Download geofabrik-belgium
         if: steps.cache-geofabrik-belgium.outputs.cache-hit != 'true'
-        run: wget -O belgium-250401.osm.pbf https://download.geofabrik.de/europe/belgium-250401.osm.pbf
+        run: wget -O belgium-250402.osm.pbf https://download.geofabrik.de/europe/belgium-250402.osm.pbf
       - name: Download geofabrik-netherlands
         if: steps.cache-geofabrik-netherlands.outputs.cache-hit != 'true'
         run: wget -O netherlands-250402.osm.pbf https://download.geofabrik.de/europe/netherlands-250402.osm.pbf
@@ -164,7 +164,7 @@ jobs:
       - name: Merge extracts
         run: >
           osmosis/osmosis*/bin/osmosis
-          --rbf belgium-250401.osm.pbf
+          --rbf belgium-250402.osm.pbf
           --rbf netherlands-250402.osm.pbf
           --rbf luxembourg-250402.osm.pbf
           --rbf 5c4402-62ed305a14a16.zip
