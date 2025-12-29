@@ -104,8 +104,8 @@ jobs:
         id: cache-cities15000
         uses: actions/cache@v3
         with:
-          path: 2e7030-646e5c9705b2c.zip
-          key: 2e7030-646e5c9705b2c.zip
+          path: 2e7140-646fa596ac18d.zip
+          key: 2e7140-646fa596ac18d.zip
 
       - name: Download osmosis
         if: steps.cache-osmosis.outputs.cache-hit != 'true'
@@ -154,7 +154,7 @@ jobs:
         run: wget -O 17dc23-62ed30c666547.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
       - name: Download cities15000
         if: steps.cache-cities15000.outputs.cache-hit != 'true'
-        run: wget -O 2e7030-646e5c9705b2c.zip http://download.geonames.org/export/dump/cities15000.zip
+        run: wget -O 2e7140-646fa596ac18d.zip http://download.geonames.org/export/dump/cities15000.zip
       - uses: actions/setup-java@v3
         with:
           distribution: 'oracle'
@@ -179,7 +179,7 @@ jobs:
       - name: Extract splitter
         run: unzip -d splitter splitter-r654.zip
       - name: Extract cities
-        run: unzip 2e7030-646e5c9705b2c.zip
+        run: unzip 2e7140-646fa596ac18d.zip
       - name: Splitter
         run: >
           java
