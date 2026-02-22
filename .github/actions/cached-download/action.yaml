@@ -1,0 +1,23 @@
+name: Cached Download
+inputs:
+  filename:
+    description: filename
+    required: true
+  url:
+    description: url
+    required: true
+outputs:
+  filename:
+    description: filename
+    value: ${{ inputs.filename }}
+runs:
+  using: "composite"
+  steps:
+    - id: cache
+      uses: actions/cache@v5
+      with:
+        path: ${{ inputs.filename }}
+        key: ${{ inputs.filename }}
+    - if: steps.cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: wget -O ${{ inputs.filename }} ${{inputs.url }}

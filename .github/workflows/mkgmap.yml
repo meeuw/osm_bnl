@@ -2,7 +2,7 @@ name: Generate OpenStreetMap Garmin maps
 on:
   push:
     branches:
-      - main
+      - cached-download-action
 jobs:
   mkgmap:
     runs-on: ubuntu-latest
@@ -10,166 +10,101 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
 
-      - name: Cache osmosis
-        id: cache-osmosis
-        uses: actions/cache@v3
+      - id: osmosis
+        uses: ./.github/actions/cached-download
         with:
-          path: osmosis-0.49.2.zip
-          key: osmosis-0.49.2.zip
-      - name: Cache geofabrik-belgium
-        id: cache-geofabrik-belgium
-        uses: actions/cache@v3
+          filename: osmosis-0.49.2.zip
+          url: https://github.com/openstreetmap/osmosis/releases/download/0.49.2/osmosis-0.49.2.zip
+      - id: belgium
+        uses: ./.github/actions/cached-download
         with:
-          path: belgium-260221.osm.pbf
-          key: belgium-260221.osm.pbf
-      - name: Cache geofabrik-netherlands
-        id: cache-geofabrik-netherlands
-        uses: actions/cache@v3
+          filename: belgium-260221.osm.pbf
+          url: https://download.geofabrik.de/europe/belgium-260221.osm.pbf
+      - id: netherlands
+        uses: ./.github/actions/cached-download
         with:
-          path: netherlands-260221.osm.pbf
-          key: netherlands-260221.osm.pbf
-      - name: Cache geofabrik-luxembourg
-        id: cache-geofabrik-luxembourg
-        uses: actions/cache@v3
+          filename: netherlands-260221.osm.pbf
+          url: https://download.geofabrik.de/europe/netherlands-260221.osm.pbf
+      - id: luxembourg
+        uses: ./.github/actions/cached-download
         with:
-          path: luxembourg-260221.osm.pbf
-          key: luxembourg-260221.osm.pbf
-      - name: Cache bounds
-        id: cache-bounds
-        uses: actions/cache@v3
+          filename: luxembourg-260221.osm.pbf
+          url: https://download.geofabrik.de/europe/luxembourg-260221.osm.pbf
+      - id: bounds
+        uses: ./.github/actions/cached-download
         with:
-          path: bounds-20260220.zip
-          key: bounds-20260220.zip
-      - name: Cache sea
-        id: cache-sea
-        uses: actions/cache@v3
+          filename: bounds-20260220.zip
+          url: http://osm.thkukuk.de/data/bounds-20260220.zip
+      - id: sea
+        uses: ./.github/actions/cached-download
         with:
-          path: sea-20260220230000.zip
-          key: sea-20260220230000.zip
-      - name: Cache mkgmap
-        id: cache-mkgmap
-        uses: actions/cache@v3
+          filename: sea-20260220230000.zip
+          url: http://osm.thkukuk.de/data/sea-20260220230000.zip
+      - id: mkgmap
+        uses: ./.github/actions/cached-download
         with:
-          path: mkgmap-r4924.zip
-          key: mkgmap-r4924.zip
-      - name: Cache splitter
-        id: cache-splitter
-        uses: actions/cache@v3
+          filename: mkgmap-r4924.zip
+          url: https://www.mkgmap.org.uk/download/mkgmap-r4924.zip
+      - id: splitter
+        uses: ./.github/actions/cached-download
         with:
-          path: splitter-r654.zip
-          key: splitter-r654.zip
-      - name: Cache M31
-        id: cache-M31
-        uses: actions/cache@v3
+          filename: splitter-r654.zip
+          url: https://www.mkgmap.org.uk/download/splitter-r654.zip
+      - id: m31
+        uses: ./.github/actions/cached-download
         with:
-          path: 114a217-611d29fea4a00.zip
-          key: 114a217-611d29fea4a00.zip
-      - name: Cache M32
-        id: cache-M32
-        uses: actions/cache@v3
+          filename: 114a217-611d29fea4a00.zip
+          url: https://www.viewfinderpanoramas.org/dem3/M31.zip
+      - id: m32
+        uses: ./.github/actions/cached-download
         with:
-          path: 1bb1c19-611e21623f400.zip
-          key: 1bb1c19-611e21623f400.zip
-      - name: Cache N31
-        id: cache-N31
-        uses: actions/cache@v3
+          filename: 1bb1c19-611e21623f400.zip
+          url: https://www.viewfinderpanoramas.org/dem3/M32.zip
+      - id: n31
+        uses: ./.github/actions/cached-download
         with:
-          path: 1f5128-611e1d8bf6680.zip
-          key: 1f5128-611e1d8bf6680.zip
-      - name: Cache N32
-        id: cache-N32
-        uses: actions/cache@v3
+          filename: 1f5128-611e1d8bf6680.zip
+          url: https://www.viewfinderpanoramas.org/dem3/N31.zip
+      - id: n32
+        uses: ./.github/actions/cached-download
         with:
-          path: a3ea25-611e1c9ba2f80.zip
-          key: a3ea25-611e1c9ba2f80.zip
-      - name: Cache Hoehendaten_Freizeitkarte_BEL
-        id: cache-Hoehendaten_Freizeitkarte_BEL
-        uses: actions/cache@v3
+          filename: a3ea25-611e1c9ba2f80.zip
+          url: https://www.viewfinderpanoramas.org/dem3/N32.zip
+      - id: hoehendaten_freizeitkarte_bel
+        uses: ./.github/actions/cached-download
         with:
-          path: 5c4402-62ed305a14a16.zip
-          key: 5c4402-62ed305a14a16.zip
-      - name: Cache Hoehendaten_Freizeitkarte_NLD
-        id: cache-Hoehendaten_Freizeitkarte_NLD
-        uses: actions/cache@v3
+          filename: 5c4402-62ed305a14a16.zip
+          url: http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_BEL.osm.pbf
+      - id: hoehendaten_freizeitkarte_nld
+        uses: ./.github/actions/cached-download
         with:
-          path: 3d557b-62ed30b3b735d.zip
-          key: 3d557b-62ed30b3b735d.zip
-      - name: Cache Hoehendaten_Freizeitkarte_LUX
-        id: cache-Hoehendaten_Freizeitkarte_LUX
-        uses: actions/cache@v3
+          filename: 3d557b-62ed30b3b735d.zip
+          url: http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_NLD.osm.pbf
+      - id: hoehendaten_freizeitkarte_lux
+        uses: ./.github/actions/cached-download
         with:
-          path: 17dc23-62ed30c666547.zip
-          key: 17dc23-62ed30c666547.zip
-      - name: Cache cities15000
-        id: cache-cities15000
-        uses: actions/cache@v3
+          filename: 17dc23-62ed30c666547.zip
+          url: http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
+      - id: cities
+        uses: ./.github/actions/cached-download
         with:
-          path: 2eb5af-64b6119a43c1c.zip
-          key: 2eb5af-64b6119a43c1c.zip
-
-      - name: Download osmosis
-        if: steps.cache-osmosis.outputs.cache-hit != 'true'
-        run: wget -O osmosis-0.49.2.zip https://github.com/openstreetmap/osmosis/releases/download/0.49.2/osmosis-0.49.2.zip
-      - name: Download geofabrik-belgium
-        if: steps.cache-geofabrik-belgium.outputs.cache-hit != 'true'
-        run: wget -O belgium-260221.osm.pbf https://download.geofabrik.de/europe/belgium-260221.osm.pbf
-      - name: Download geofabrik-netherlands
-        if: steps.cache-geofabrik-netherlands.outputs.cache-hit != 'true'
-        run: wget -O netherlands-260221.osm.pbf https://download.geofabrik.de/europe/netherlands-260221.osm.pbf
-      - name: Download geofabrik-luxembourg
-        if: steps.cache-geofabrik-luxembourg.outputs.cache-hit != 'true'
-        run: wget -O luxembourg-260221.osm.pbf https://download.geofabrik.de/europe/luxembourg-260221.osm.pbf
-      - name: Download bounds
-        if: steps.cache-bounds.outputs.cache-hit != 'true'
-        run: wget -O bounds-20260220.zip http://osm.thkukuk.de/data/bounds-20260220.zip
-      - name: Download sea
-        if: steps.cache-sea.outputs.cache-hit != 'true'
-        run: wget -O sea-20260220230000.zip http://osm.thkukuk.de/data/sea-20260220230000.zip
-      - name: Download mkgmap
-        if: steps.cache-mkgmap.outputs.cache-hit != 'true'
-        run: wget -O mkgmap-r4924.zip https://www.mkgmap.org.uk/download/mkgmap-r4924.zip
-      - name: Download splitter
-        if: steps.cache-splitter.outputs.cache-hit != 'true'
-        run: wget -O splitter-r654.zip https://www.mkgmap.org.uk/download/splitter-r654.zip
-      - name: Download M31
-        if: steps.cache-M31.outputs.cache-hit != 'true'
-        run: wget -O 114a217-611d29fea4a00.zip https://www.viewfinderpanoramas.org/dem3/M31.zip
-      - name: Download M32
-        if: steps.cache-M32.outputs.cache-hit != 'true'
-        run: wget -O 1bb1c19-611e21623f400.zip https://www.viewfinderpanoramas.org/dem3/M32.zip
-      - name: Download N31
-        if: steps.cache-N31.outputs.cache-hit != 'true'
-        run: wget -O 1f5128-611e1d8bf6680.zip https://www.viewfinderpanoramas.org/dem3/N31.zip
-      - name: Download N32
-        if: steps.cache-N32.outputs.cache-hit != 'true'
-        run: wget -O a3ea25-611e1c9ba2f80.zip https://www.viewfinderpanoramas.org/dem3/N32.zip
-      - name: Download Hoehendaten_Freizeitkarte_BEL
-        if: steps.cache-Hoehendaten_Freizeitkarte_BEL.outputs.cache-hit != 'true'
-        run: wget -O 5c4402-62ed305a14a16.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_BEL.osm.pbf
-      - name: Download Hoehendaten_Freizeitkarte_NLD
-        if: steps.cache-Hoehendaten_Freizeitkarte_NLD.outputs.cache-hit != 'true'
-        run: wget -O 3d557b-62ed30b3b735d.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_NLD.osm.pbf
-      - name: Download Hoehendaten_Freizeitkarte_LUX
-        if: steps.cache-Hoehendaten_Freizeitkarte_LUX.outputs.cache-hit != 'true'
-        run: wget -O 17dc23-62ed30c666547.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
-      - name: Download cities15000
-        if: steps.cache-cities15000.outputs.cache-hit != 'true'
-        run: wget -O 2eb5af-64b6119a43c1c.zip http://download.geonames.org/export/dump/cities15000.zip
+          filename: 2eb5af-64b6119a43c1c.zip
+          url: http://download.geonames.org/export/dump/cities15000.zip
       - uses: actions/setup-java@v3
         with:
           distribution: 'oracle'
           java-version: '17'
       - name: Extract osmosis
-        run: unzip -d osmosis osmosis-0.49.2.zip
+        run: unzip -d osmosis ${{ steps.osmosis.outputs.filename }}
       - name: Merge extracts
         run: >
           osmosis/osmosis*/bin/osmosis
-          --rbf belgium-260221.osm.pbf
-          --rbf netherlands-260221.osm.pbf
-          --rbf luxembourg-260221.osm.pbf
-          --rbf 5c4402-62ed305a14a16.zip
-          --rbf 3d557b-62ed30b3b735d.zip
-          --rbf 17dc23-62ed30c666547.zip
+          --rbf ${{ steps.belgium.outputs.filename }}
+          --rbf ${{ steps.netherlands.outputs.filename }}
+          --rbf ${{ steps.luxembourg.outputs.filename }}
+          --rbf ${{ steps.hoehendaten_freizeitkarte_bel.outputs.filename }}
+          --rbf ${{ steps.hoehendaten_freizeitkarte_nld.outputs.filename }}
+          --rbf ${{ steps.hoehendaten_freizeitkarte_lux.outputs.filename }}
           --merge
           --merge
           --merge
@@ -177,9 +112,9 @@ jobs:
           --merge
           --wb merged.osm.pbf
       - name: Extract splitter
-        run: unzip -d splitter splitter-r654.zip
+        run: unzip -d splitter ${{ steps.splitter.outputs.filename }}
       - name: Extract cities
-        run: unzip 2eb5af-64b6119a43c1c.zip
+        run: unzip ${{ steps.cities.outputs.filename }}
       - name: Splitter
         run: >
           java
@@ -193,23 +128,23 @@ jobs:
           --polygon-file=resources/benelux.poly
           merged.osm.pbf
       - name: Extract mkgmap
-        run: unzip -d mkgmap mkgmap-r4924.zip
+        run: unzip -d mkgmap ${{ steps.mkgmap.outputs.filename }}
       - name: Extract dem files
         run: >
           for Z in
-          114a217-611d29fea4a00.zip
-          1bb1c19-611e21623f400.zip
-          1f5128-611e1d8bf6680.zip
-          a3ea25-611e1c9ba2f80.zip
+          ${{ steps.m31.outputs.filename }}
+          ${{ steps.m32.outputs.filename }}
+          ${{ steps.n31.outputs.filename }}
+          ${{ steps.n32.outputs.filename }}
           ; do
           unzip -d map_with_dem_files $Z ;
           done
       - name: Move DEM files
         run: mv map_with_dem_files/???/*.hgt map_with_dem_files/
       - name: Rename sea.zip
-        run: mv sea-20260220230000.zip sea.zip
+        run: mv ${{ steps.sea.outputs.filename }} sea.zip
       - name: Rename bounds.zip
-        run: mv bounds-20260220.zip bounds.zip
+        run: mv ${{ steps.bounds.outputs.filename }} bounds.zip
       - name: mkgmap
         run: >
           java
@@ -220,9 +155,9 @@ jobs:
           -c splitted/template.args
           "typ/Openfietsmap lite/20011.txt"
       - name: Rename sea.zip
-        run: mv sea.zip sea-20260220230000.zip
+        run: mv sea.zip ${{ steps.sea.outputs.filename }}
       - name: Rename bounds.zip
-        run: mv bounds.zip bounds-20260220.zip
+        run: mv bounds.zip ${{ steps.bounds.outputs.filename }}
       - uses: "marvinpinto/action-automatic-releases@v1.2.1"
         with:
           repo_token: "${{ secrets.PAT }}"
