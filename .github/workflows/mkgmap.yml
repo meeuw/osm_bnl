@@ -15,17 +15,17 @@ jobs:
         with:
           filename: osmosis-0.49.2.zip
           url: https://github.com/openstreetmap/osmosis/releases/download/0.49.2/osmosis-0.49.2.zip
-      - id: belgium
+      - id: geofabrik-belgium
         uses: ./.github/actions/cached-download
         with:
           filename: belgium-260221.osm.pbf
           url: https://download.geofabrik.de/europe/belgium-260221.osm.pbf
-      - id: netherlands
+      - id: geofabrik-netherlands
         uses: ./.github/actions/cached-download
         with:
           filename: netherlands-260221.osm.pbf
           url: https://download.geofabrik.de/europe/netherlands-260221.osm.pbf
-      - id: luxembourg
+      - id: geofabrik-luxembourg
         uses: ./.github/actions/cached-download
         with:
           filename: luxembourg-260221.osm.pbf
@@ -38,8 +38,8 @@ jobs:
       - id: sea
         uses: ./.github/actions/cached-download
         with:
-          filename: sea-20260220230000.zip
-          url: http://osm.thkukuk.de/data/sea-20260220230000.zip
+          filename: sea-20260221230000.zip
+          url: http://osm.thkukuk.de/data/sea-20260221230000.zip
       - id: mkgmap
         uses: ./.github/actions/cached-download
         with:
@@ -50,42 +50,42 @@ jobs:
         with:
           filename: splitter-r654.zip
           url: https://www.mkgmap.org.uk/download/splitter-r654.zip
-      - id: m31
+      - id: M31
         uses: ./.github/actions/cached-download
         with:
           filename: 114a217-611d29fea4a00.zip
           url: https://www.viewfinderpanoramas.org/dem3/M31.zip
-      - id: m32
+      - id: M32
         uses: ./.github/actions/cached-download
         with:
           filename: 1bb1c19-611e21623f400.zip
           url: https://www.viewfinderpanoramas.org/dem3/M32.zip
-      - id: n31
+      - id: N31
         uses: ./.github/actions/cached-download
         with:
           filename: 1f5128-611e1d8bf6680.zip
           url: https://www.viewfinderpanoramas.org/dem3/N31.zip
-      - id: n32
+      - id: N32
         uses: ./.github/actions/cached-download
         with:
           filename: a3ea25-611e1c9ba2f80.zip
           url: https://www.viewfinderpanoramas.org/dem3/N32.zip
-      - id: hoehendaten_freizeitkarte_bel
+      - id: Hoehendaten_Freizeitkarte_BEL
         uses: ./.github/actions/cached-download
         with:
           filename: 5c4402-62ed305a14a16.zip
           url: http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_BEL.osm.pbf
-      - id: hoehendaten_freizeitkarte_nld
+      - id: Hoehendaten_Freizeitkarte_NLD
         uses: ./.github/actions/cached-download
         with:
           filename: 3d557b-62ed30b3b735d.zip
           url: http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_NLD.osm.pbf
-      - id: hoehendaten_freizeitkarte_lux
+      - id: Hoehendaten_Freizeitkarte_LUX
         uses: ./.github/actions/cached-download
         with:
           filename: 17dc23-62ed30c666547.zip
           url: http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
-      - id: cities
+      - id: cities15000
         uses: ./.github/actions/cached-download
         with:
           filename: 2eb5af-64b6119a43c1c.zip
@@ -99,12 +99,12 @@ jobs:
       - name: Merge extracts
         run: >
           osmosis/osmosis*/bin/osmosis
-          --rbf ${{ steps.belgium.outputs.filename }}
-          --rbf ${{ steps.netherlands.outputs.filename }}
-          --rbf ${{ steps.luxembourg.outputs.filename }}
-          --rbf ${{ steps.hoehendaten_freizeitkarte_bel.outputs.filename }}
-          --rbf ${{ steps.hoehendaten_freizeitkarte_nld.outputs.filename }}
-          --rbf ${{ steps.hoehendaten_freizeitkarte_lux.outputs.filename }}
+          --rbf ${{ steps.geofabrik-belgium.outputs.filename }}
+          --rbf ${{ steps.geofabrik-netherlands.outputs.filename }}
+          --rbf ${{ steps.geofabrik-luxembourg.outputs.filename }}
+          --rbf ${{ steps.Hoehendaten_Freizeitkarte_BEL.outputs.filename }}
+          --rbf ${{ steps.Hoehendaten_Freizeitkarte_NLD.outputs.filename }}
+          --rbf ${{ steps.Hoehendaten_Freizeitkarte_LUX.outputs.filename }}
           --merge
           --merge
           --merge
@@ -114,7 +114,7 @@ jobs:
       - name: Extract splitter
         run: unzip -d splitter ${{ steps.splitter.outputs.filename }}
       - name: Extract cities
-        run: unzip ${{ steps.cities.outputs.filename }}
+        run: unzip ${{ steps.cities15000.outputs.filename }}
       - name: Splitter
         run: >
           java
@@ -132,10 +132,10 @@ jobs:
       - name: Extract dem files
         run: >
           for Z in
-          ${{ steps.m31.outputs.filename }}
-          ${{ steps.m32.outputs.filename }}
-          ${{ steps.n31.outputs.filename }}
-          ${{ steps.n32.outputs.filename }}
+          ${{ steps.M31.outputs.filename }}
+          ${{ steps.M32.outputs.filename }}
+          ${{ steps.N31.outputs.filename }}
+          ${{ steps.N32.outputs.filename }}
           ; do
           unzip -d map_with_dem_files $Z ;
           done
