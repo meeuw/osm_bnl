@@ -18,18 +18,18 @@ jobs:
       - id: geofabrik-belgium
         uses: ./.github/actions/cached-download
         with:
-          filename: belgium-260221.osm.pbf
-          url: https://download.geofabrik.de/europe/belgium-260221.osm.pbf
+          filename: belgium-260222.osm.pbf
+          url: https://download.geofabrik.de/europe/belgium-260222.osm.pbf
       - id: geofabrik-netherlands
         uses: ./.github/actions/cached-download
         with:
-          filename: netherlands-260221.osm.pbf
-          url: https://download.geofabrik.de/europe/netherlands-260221.osm.pbf
+          filename: netherlands-260222.osm.pbf
+          url: https://download.geofabrik.de/europe/netherlands-260222.osm.pbf
       - id: geofabrik-luxembourg
         uses: ./.github/actions/cached-download
         with:
-          filename: luxembourg-260222.osm.pbf
-          url: https://download.geofabrik.de/europe/luxembourg-260222.osm.pbf
+          filename: luxembourg-260223.osm.pbf
+          url: https://download.geofabrik.de/europe/luxembourg-260223.osm.pbf
       - id: bounds
         uses: ./.github/actions/cached-download
         with:
