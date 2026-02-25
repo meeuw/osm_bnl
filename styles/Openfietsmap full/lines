@@ -6,7 +6,7 @@ include 'inc/address';
 include 'inc/contours';
 
 # clear tags
-highway=proposed {delete 'highway'; delete 'oneway'; delete 'tunnel'; delete 'bridge'; delete 'ncn_from_relation'; delete 'rcn_from_relation'; delete 'icn_from_relation' delete 'lcn_from_relation'; delete 'tcn_from_relation'; delete 'mtb_from_relation' }
+highway=proposed {delete 'highway'; delete 'oneway'; delete 'tunnel'; delete 'bridge'; delete 'ncn_from_relation'; delete 'rcn_from_relation'; delete 'icn_from_relation' delete 'lcn_from_relation'; delete 'tcn_from_relation'; delete 'mtb_from_relation'; delete 'junction' }
 motor_vehicle=* { add car='${motor_vehicle}' ; delete motor_vehicle }
 motorcar=*      { add car='${motorcar}' ; delete motorcar }
 motorcycle=*    { delete motorcycle }
@@ -14,6 +14,7 @@ cycleway=no { delete 'cycleway' }
 cycleway=track & (bicycle=no|bicycle=use_sidepath) { delete 'bicycle' }
 cycleway=lane & (bicycle=no|bicycle=use_sidepath) { delete 'bicycle' }
 highway=busway { set highway=service; add access=no }
+
 
 (highway=motorway | highway=motorway_junction | highway=trunk | highway=footway  | route=ferry) & toll=yes {delete toll}
 highway=* & toll=yes & bicycle!=no & service!=parking_aisle & toll:bicycle!=no {set toll:bicycle=yes}
@@ -49,6 +50,7 @@ foot=destination | foot=official | foot=permissive {set foot=yes}
 highway=* & highway ~ '(fiets|Fiets|mtb|Mtb|bike|Bike|rad|Rad|cycleway;|;cycleway)' {set highway=cycleway}
 highway=* & highway ~ '.*(;).*' {set highway=unclassified}
 highway=* & ice_road=yes {name '${name} (ice road)' | '(ice road)'} [0x10102 resolution 22]
+highway=service & is_closed()=true &  (bicycle=no | access = no | access= private ) & foot!=yes {delete highway ; set area:highway=service} 
 
 # set toll and ferry flags
 highway=* & bicycle!=no {add toll=yes}
@@ -79,7 +81,7 @@ highway=raceway {set highway=service}
 highway=motorway_link | (highway=* & motorroad=yes) { set highway=motorway }
 highway=trunk_link { set highway=trunk }
 (highway=trunk | highway=motorway)  & bicycleroute=yes { set highway=primary }
-(highway=trunk | highway=motorway)  & cycleway=* { set highway=motorway_bike }
+(highway=trunk | highway=motorway)  & (cycleway:right=* | cycleway:left=* | cycleway=*) { set highway=motorway_bike }
 (highway=trunk | highway=motorway)  & bicycle=yes { set highway=motorway_bike }
 
 highway=trunk & mkgmap:country ~ '(NLD|BEL|LUX|FRA|DEU|AUT|CHE|DNK|HUN|ROU)' { set highway=motorway }
@@ -302,20 +304,20 @@ highway=steps {set mkgmap:unpaved=1; add access = no; add foot = yes; add oneway
 
 # cycleroutes
 bicycleroute=yes & bicycle!=no {set motorcar=yes}
-highway=* & icn_from_relation=yes & state!=icn_proposed  {name '${iref} (${iname|not-equal:iref})' | '${iref}' }  [0x00 resolution 15-15 continue]
-highway=* & icn_from_relation=yes  & state!=icn_proposed {name '${iref} (${iname|not-equal:iref})' | '${iref}' }  [0x24 resolution 16-17 continue]
-highway=* & icn_from_relation=yes & state!=icn_proposed  {name '${iref} (${iname|not-equal:iref})' | '${iref}' } [0x23 resolution 18-19 continue]
-icn_from_relation=yes & state!=icn_proposed & railway!=rail {name '${iref|highway-symbol:hbox} (${iname|not-equal:iref})' | '${iref|highway-symbol:hbox}' } [0x02 resolution 20-21 continue] 
+highway=* & icn_from_relation=yes {name '${iref} (${iname|not-equal:iref})' | '${iref}' }  [0x00 resolution 15-15 continue]
+highway=* & icn_from_relation=yes {name '${iref} (${iname|not-equal:iref})' | '${iref}' }  [0x24 resolution 16-17 continue]
+highway=* & icn_from_relation=yes {name '${iref} (${iname|not-equal:iref})' | '${iref}' } [0x23 resolution 18-19 continue]
+icn_from_relation=yes & railway!=rail {name '${iref|highway-symbol:hbox} (${iname|not-equal:iref})' | '${iref|highway-symbol:hbox}' } [0x02 resolution 20-21 continue] 
 
-highway=* & ncn_from_relation=yes & state!=ncn_proposed  {name '${nref} (${nname|not-equal:nref})' | '${nref}' } [0x00 resolution 16-17 continue]
-highway=* & ncn_from_relation=yes & state!=ncn_proposed  {name '${nref} (${nname|not-equal:nref})' | '${nref}' }[0x24 resolution 18-19 continue]
-ncn_from_relation=yes & state!=ncn_proposed & railway!=rail {name '${nref|highway-symbol:oval} (${nname|not-equal:nref})'| '${nref|highway-symbol:oval}'} [0x02 resolution 20-21 continue]
-rcn_from_relation=yes & ncn_from_relation!=yes & icn_from_relation!=yes & state!=rcn_proposed {name '${rnote}' | '${rref}' | '${rname}'}  [0x00 resolution 18-19 continue]
+highway=* & ncn_from_relation=yes {name '${nref} (${nname|not-equal:nref})' | '${nref}' } [0x00 resolution 16-17 continue]
+highway=* & ncn_from_relation=yes {name '${nref} (${nname|not-equal:nref})' | '${nref}' }[0x24 resolution 18-19 continue]
+ncn_from_relation=yes & railway!=rail {name '${nref|highway-symbol:oval} (${nname|not-equal:nref})'| '${nref|highway-symbol:oval}'} [0x02 resolution 20-21 continue]
+rcn_from_relation=yes & ncn_from_relation!=yes & icn_from_relation!=yes {name '${rnote}' | '${rref}' | '${rname}'}  [0x00 resolution 18-19 continue]
 bicycleroute=yes & !(ncn_from_relation=yes | icn_from_relation=yes) [0x10119 resolution 20-21 continue]
 
-(ncn_from_relation=yes | lcn_from_relation=yes | ncn_ref=* | lcn_ref=*) & state!=ncn_proposed {name '${nref|highway-symbol:oval}'| '${ncn_ref|highway-symbol:oval}' | '${lcn_ref|highway-symbol:oval}' | '${lref|highway-symbol:oval}' }  [0x28 resolution 22 continue] 
-rcn_from_relation=yes & state!=rcn_proposed  {name '${rnote}' | '${rref}' | '${rname}'} [0x19 resolution 22 continue]
-lcn_from_relation=yes  & state!=rcn_proposed {name '${lname}'} [0x27 resolution 22 continue]
+(ncn_from_relation=yes | lcn_from_relation=yes | ncn_ref=* | rcn_ref=* | lcn_ref=*) {name '${nref|highway-symbol:oval}'| '${ncn_ref|highway-symbol:oval}' | '${rcn_ref|highway-symbol:oval}' | '${lcn_ref|highway-symbol:oval}' | '${lref|highway-symbol:oval}' }  [0x28 resolution 22 continue]
+rcn_from_relation=yes {name '${rnote}' | '${rref}' | '${rname}'} [0x19 resolution 22 continue]
+lcn_from_relation=yes {name '${lname}'} [0x27 resolution 22 continue]
 bicycleroute=yes & junction!=roundabout & railway!=rail [0x02 road_class=3 road_speed=2 resolution 22 continue]
 
 # Mop up any unrecognised highway types
@@ -363,6 +365,7 @@ route=ferry & seasonal=*  {set bicycle=no; set motorcar=no; add foot=yes; name '
 route=ferry & access:conditional=*  {set bicycle=no; set motorcar=no; add foot=yes; name '${name} access=${access:conditional}' } [0x1b road_class=0 road_speed=0 resolution 24 continue]
 route=ferry & seasonal!=* [0x1b road_class=3 road_speed=0 resolution 24 continue]
 
+bay=fjord { add waterway=river }
 waterway=* & source=3dshapes { add natural=water }
 (waterway=river | waterway=canal) & intermittent=yes [0x10A02 resolution 18]
 waterway=river & natural!=water [0x18 resolution 18-19 continue]

@@ -44,6 +44,7 @@ shop=bicycle  [0x2f03 resolution 22]
 amenity=bicycle_repair_station & (mkgmap:country=NLD | mkgmap:admin_level4="Vlaanderen") {name '${name}' | 'Fietsreparatie station' } [0x2f03 resolution 22]
 amenity=bicycle_repair_station & (mkgmap:country=DEU | mkgmap:country=AUT) {name '${name}' | 'Fahrrad-Reparaturstation' } [0x2f03 resolution 22]
 amenity=bicycle_repair_station  {name '${name}' | 'Bicycle repair station' } [0x2f03 resolution 22]
+amenity=bicycle_wash  {name '${name}' | '${operator}' | 'bike wash' } [0x2f03 resolution 22]
 shop=* & (service:bicycle:retail=yes | service:bicycle:repair=yes | service:bicycle:tools=yes) [0x2f03 resolution 22]
 amenity=charging_station & (bicycle=yes | bike=yes | charging=pedelec) & (mkgmap:country=NLD | mkgmap:admin_level4="Vlaanderen") {name 'oplaadpunt ${name}' | 'oplaadpunt' } [0x4400 resolution 24 continue]
 amenity=charging_station & (bicycle=yes | bike=yes | charging=pedelec) & (mkgmap:country=DEU | mkgmap:country=AUT) {name 'Ladepunkt ${name}' | 'Ladepunkt' } [0x4400 resolution 24 continue]
@@ -181,7 +182,8 @@ amenity=zoo [0x2c07 default_name 'zoo' resolution 24]
   name '${name|def:} ${ref|def:}';
 }
 
-public_transport=platform | highway=bus_stop [0x2f08 resolution 24]
+(public_transport=platform | highway=bus_stop) & mkgmap:line2poitype=start [0x2f08 resolution 24]
+(public_transport=platform | highway=bus_stop) & mkgmap:line2poi!=true [0x2f08 resolution 24]
 
 highway=steps & tunnel=yes & (bicycle=yes|bicycle=dismount) & mkgmap:line2poitype=mid [0x2810 resolution 24]
 
