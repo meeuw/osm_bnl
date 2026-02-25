@@ -18,18 +18,18 @@ jobs:
       - id: geofabrik-belgium
         uses: ./.github/actions/cached-download
         with:
-          filename: belgium-260222.osm.pbf
-          url: https://download.geofabrik.de/europe/belgium-260222.osm.pbf
+          filename: belgium-260223.osm.pbf
+          url: https://download.geofabrik.de/europe/belgium-260223.osm.pbf
       - id: geofabrik-netherlands
         uses: ./.github/actions/cached-download
         with:
-          filename: netherlands-260222.osm.pbf
-          url: https://download.geofabrik.de/europe/netherlands-260222.osm.pbf
+          filename: netherlands-260223.osm.pbf
+          url: https://download.geofabrik.de/europe/netherlands-260223.osm.pbf
       - id: geofabrik-luxembourg
         uses: ./.github/actions/cached-download
         with:
-          filename: luxembourg-260223.osm.pbf
-          url: https://download.geofabrik.de/europe/luxembourg-260223.osm.pbf
+          filename: luxembourg-260224.osm.pbf
+          url: https://download.geofabrik.de/europe/luxembourg-260224.osm.pbf
       - id: bounds
         uses: ./.github/actions/cached-download
         with:
@@ -38,8 +38,8 @@ jobs:
       - id: sea
         uses: ./.github/actions/cached-download
         with:
-          filename: sea-20260221230000.zip
-          url: http://osm.thkukuk.de/data/sea-20260221230000.zip
+          filename: sea-20260223230000.zip
+          url: http://osm.thkukuk.de/data/sea-20260223230000.zip
       - id: mkgmap
         uses: ./.github/actions/cached-download
         with:
@@ -88,7 +88,7 @@ jobs:
       - id: cities15000
         uses: ./.github/actions/cached-download
         with:
-          filename: 2eb7c9-64b749e58f6ef.zip
+          filename: 2eb9e9-64b9cd1ebbc79.zip
           url: http://download.geonames.org/export/dump/cities15000.zip
       - uses: actions/setup-java@v3
         with:
@@ -98,19 +98,13 @@ jobs:
         run: unzip -d osmosis ${{ steps.osmosis.outputs.filename }}
       - name: Merge extracts
         run: >
-          osmosis/osmosis*/bin/osmosis
-          --rbf ${{ steps.geofabrik-belgium.outputs.filename }}
-          --rbf ${{ steps.geofabrik-netherlands.outputs.filename }}
-          --rbf ${{ steps.geofabrik-luxembourg.outputs.filename }}
-          --rbf ${{ steps.Hoehendaten_Freizeitkarte_BEL.outputs.filename }}
-          --rbf ${{ steps.Hoehendaten_Freizeitkarte_NLD.outputs.filename }}
-          --rbf ${{ steps.Hoehendaten_Freizeitkarte_LUX.outputs.filename }}
-          --merge
-          --merge
-          --merge
-          --merge
-          --merge
-          --wb merged.osm.pbf
+          scripts/osmosis.sh
+          ${{ steps.geofabrik-belgium.outputs.filename }}
+          ${{ steps.geofabrik-netherlands.outputs.filename }}
+          ${{ steps.geofabrik-luxembourg.outputs.filename }}
+          ${{ steps.Hoehendaten_Freizeitkarte_BEL.outputs.filename }}
+          ${{ steps.Hoehendaten_Freizeitkarte_NLD.outputs.filename }}
+          ${{ steps.Hoehendaten_Freizeitkarte_LUX.outputs.filename }}
       - name: Extract splitter
         run: unzip -d splitter ${{ steps.splitter.outputs.filename }}
       - name: Extract cities
