@@ -18,18 +18,18 @@ jobs:
       - id: geofabrik-belgium
         uses: ./.github/actions/cached-download
         with:
-          filename: belgium-260227.osm.pbf
-          url: https://download.geofabrik.de/europe/belgium-260227.osm.pbf
+          filename: belgium-260228.osm.pbf
+          url: https://download.geofabrik.de/europe/belgium-260228.osm.pbf
       - id: geofabrik-netherlands
         uses: ./.github/actions/cached-download
         with:
-          filename: netherlands-260227.osm.pbf
-          url: https://download.geofabrik.de/europe/netherlands-260227.osm.pbf
+          filename: netherlands-260228.osm.pbf
+          url: https://download.geofabrik.de/europe/netherlands-260228.osm.pbf
       - id: geofabrik-luxembourg
         uses: ./.github/actions/cached-download
         with:
-          filename: luxembourg-260228.osm.pbf
-          url: https://download.geofabrik.de/europe/luxembourg-260228.osm.pbf
+          filename: luxembourg-260301.osm.pbf
+          url: https://download.geofabrik.de/europe/luxembourg-260301.osm.pbf
       - id: bounds
         uses: ./.github/actions/cached-download
         with:
@@ -38,8 +38,8 @@ jobs:
       - id: sea
         uses: ./.github/actions/cached-download
         with:
-          filename: sea-20260224230000.zip
-          url: http://osm.thkukuk.de/data/sea-20260224230000.zip
+          filename: sea-20260228230000.zip
+          url: http://osm.thkukuk.de/data/sea-20260228230000.zip
       - id: mkgmap
         uses: ./.github/actions/cached-download
         with:
@@ -88,7 +88,7 @@ jobs:
       - id: cities15000
         uses: ./.github/actions/cached-download
         with:
-          filename: 2ec03d-64bedb875b004.zip
+          filename: 2ec2fe-64c0168cda731.zip
           url: http://download.geonames.org/export/dump/cities15000.zip
       - uses: actions/setup-java@v3
         with:
@@ -96,9 +96,29 @@ jobs:
           java-version: '17'
       - name: Extract osmosis
         run: unzip -d osmosis ${{ steps.osmosis.outputs.filename }}
+      - name: merge
+        id: merged
+        run: >
+          echo filename=$(cat
+          $CACHE/$(< names/osmosis)
+          $CACHE/$(< names/geofabrik-belgium)
+          $CACHE/$(< names/geofabrik-netherlands)
+          $CACHE/$(< names/geofabrik-luxembourg)
+          $CACHE/$(< names/Hoehendaten_Freizeitkarte_BEL)
+          $CACHE/$(< names/Hoehendaten_Freizeitkarte_NLD)
+          $CACHE/$(< names/Hoehendaten_Freizeitkarte_LUX)
+          |md5sum|cut -c-32
+          ).osm.pbf >> $GITHUB_OUTPUT
+      - id: cache-merge
+        uses: actions/cache@v5
+        with:
+          path: ${{ steps.merged.outputs.filename }}
+          key: ${{ steps.merged.outputs.filename }}
       - name: Merge extracts
+        if: steps.cache.outputs.cache-hit != 'true'
         run: >
           scripts/osmosis.sh
+          ${{ steps.merged.outputs.filename }}
           ${{ steps.geofabrik-belgium.outputs.filename }}
           ${{ steps.geofabrik-netherlands.outputs.filename }}
           ${{ steps.geofabrik-luxembourg.outputs.filename }}
@@ -120,7 +140,7 @@ jobs:
           --mapid=10010001
           --geonames-file=cities15000.txt
           --polygon-file=resources/benelux.poly
-          merged.osm.pbf
+          ${{ steps.merged.outputs.filename }}
       - name: Extract mkgmap
         run: unzip -d mkgmap ${{ steps.mkgmap.outputs.filename }}
       - name: Extract dem files
