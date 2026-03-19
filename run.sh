@@ -8,12 +8,12 @@ echo osmosis-0.49.2.zip > names/osmosis
 echo belgium-260317.osm.pbf > names/geofabrik-belgium
 [ -f "$CACHE/netherlands-260317.osm.pbf" ] || wcurl -o $CACHE/netherlands-260317.osm.pbf https://download.geofabrik.de/europe/netherlands-260317.osm.pbf
 echo netherlands-260317.osm.pbf > names/geofabrik-netherlands
-[ -f "$CACHE/luxembourg-260317.osm.pbf" ] || wcurl -o $CACHE/luxembourg-260317.osm.pbf https://download.geofabrik.de/europe/luxembourg-260317.osm.pbf
-echo luxembourg-260317.osm.pbf > names/geofabrik-luxembourg
+[ -f "$CACHE/luxembourg-260318.osm.pbf" ] || wcurl -o $CACHE/luxembourg-260318.osm.pbf https://download.geofabrik.de/europe/luxembourg-260318.osm.pbf
+echo luxembourg-260318.osm.pbf > names/geofabrik-luxembourg
 [ -f "$CACHE/bounds-20260313.zip" ] || wcurl -o $CACHE/bounds-20260313.zip http://osm.thkukuk.de/data/bounds-20260313.zip
 echo bounds-20260313.zip > names/bounds
-[ -f "$CACHE/sea-20260316230000.zip" ] || wcurl -o $CACHE/sea-20260316230000.zip http://osm.thkukuk.de/data/sea-20260316230000.zip
-echo sea-20260316230000.zip > names/sea
+[ -f "$CACHE/sea-20260317230000.zip" ] || wcurl -o $CACHE/sea-20260317230000.zip http://osm.thkukuk.de/data/sea-20260317230000.zip
+echo sea-20260317230000.zip > names/sea
 [ -f "$CACHE/mkgmap-r4924.zip" ] || wcurl -o $CACHE/mkgmap-r4924.zip https://www.mkgmap.org.uk/download/mkgmap-r4924.zip
 echo mkgmap-r4924.zip > names/mkgmap
 [ -f "$CACHE/splitter-r654.zip" ] || wcurl -o $CACHE/splitter-r654.zip https://www.mkgmap.org.uk/download/splitter-r654.zip
@@ -32,8 +32,8 @@ echo 5c4402-62ed305a14a16.zip > names/Hoehendaten_Freizeitkarte_BEL
 echo 3d557b-62ed30b3b735d.zip > names/Hoehendaten_Freizeitkarte_NLD
 [ -f "$CACHE/17dc23-62ed30c666547.zip" ] || wcurl -o $CACHE/17dc23-62ed30c666547.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
 echo 17dc23-62ed30c666547.zip > names/Hoehendaten_Freizeitkarte_LUX
-[ -f "$CACHE/2ed904-64d4352765dc2.zip" ] || wcurl -o $CACHE/2ed904-64d4352765dc2.zip http://download.geonames.org/export/dump/cities15000.zip
-echo 2ed904-64d4352765dc2.zip > names/cities15000
+[ -f "$CACHE/2ed945-64d576f8aa8e5.zip" ] || wcurl -o $CACHE/2ed945-64d576f8aa8e5.zip http://download.geonames.org/export/dump/cities15000.zip
+echo 2ed945-64d576f8aa8e5.zip > names/cities15000
 MERGED=$(cat \
   $CACHE/$(< names/osmosis) \
   $CACHE/$(< names/geofabrik-belgium) \
