@@ -28,8 +28,8 @@ jobs:
       - id: geofabrik-luxembourg
         uses: ./.github/actions/cached-download
         with:
-          filename: luxembourg-260404.osm.pbf
-          url: https://download.geofabrik.de/europe/luxembourg-260404.osm.pbf
+          filename: luxembourg-260405.osm.pbf
+          url: https://download.geofabrik.de/europe/luxembourg-260405.osm.pbf
       - id: bounds
         uses: ./.github/actions/cached-download
         with:
@@ -38,8 +38,8 @@ jobs:
       - id: sea
         uses: ./.github/actions/cached-download
         with:
-          filename: sea-20260403220000.zip
-          url: http://osm.thkukuk.de/data/sea-20260403220000.zip
+          filename: sea-20260404220000.zip
+          url: http://osm.thkukuk.de/data/sea-20260404220000.zip
       - id: mkgmap
         uses: ./.github/actions/cached-download
         with:
@@ -88,7 +88,7 @@ jobs:
       - id: cities15000
         uses: ./.github/actions/cached-download
         with:
-          filename: 2efbcb-64eacfeaec37e.zip
+          filename: 2efc81-64ec0a2a85e5d.zip
           url: http://download.geonames.org/export/dump/cities15000.zip
       - uses: actions/setup-java@v3
         with:
