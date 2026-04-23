@@ -18,18 +18,18 @@ jobs:
       - id: geofabrik-belgium
         uses: ./.github/actions/cached-download
         with:
-          filename: belgium-260421.osm.pbf
-          url: https://download.geofabrik.de/europe/belgium-260421.osm.pbf
+          filename: belgium-260422.osm.pbf
+          url: https://download.geofabrik.de/europe/belgium-260422.osm.pbf
       - id: geofabrik-netherlands
         uses: ./.github/actions/cached-download
         with:
-          filename: netherlands-260421.osm.pbf
-          url: https://download.geofabrik.de/europe/netherlands-260421.osm.pbf
+          filename: netherlands-260422.osm.pbf
+          url: https://download.geofabrik.de/europe/netherlands-260422.osm.pbf
       - id: geofabrik-luxembourg
         uses: ./.github/actions/cached-download
         with:
-          filename: luxembourg-260421.osm.pbf
-          url: https://download.geofabrik.de/europe/luxembourg-260421.osm.pbf
+          filename: luxembourg-260422.osm.pbf
+          url: https://download.geofabrik.de/europe/luxembourg-260422.osm.pbf
       - id: bounds
         uses: ./.github/actions/cached-download
         with:
@@ -38,8 +38,8 @@ jobs:
       - id: sea
         uses: ./.github/actions/cached-download
         with:
-          filename: sea-20260420220000.zip
-          url: http://osm.thkukuk.de/data/sea-20260420220000.zip
+          filename: sea-20260421220000.zip
+          url: http://osm.thkukuk.de/data/sea-20260421220000.zip
       - id: mkgmap
         uses: ./.github/actions/cached-download
         with:
@@ -88,7 +88,7 @@ jobs:
       - id: cities15000
         uses: ./.github/actions/cached-download
         with:
-          filename: 31ba47-64fee705bd7f7.zip
+          filename: 31be92-650169cf2bfc6.zip
           url: http://download.geonames.org/export/dump/cities15000.zip
       - uses: actions/setup-java@v3
         with:
