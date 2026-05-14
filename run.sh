@@ -8,8 +8,8 @@ echo osmosis-0.49.2.zip > names/osmosis
 echo belgium-260512.osm.pbf > names/geofabrik-belgium
 [ -f "$CACHE/netherlands-260512.osm.pbf" ] || wcurl -o $CACHE/netherlands-260512.osm.pbf https://download.geofabrik.de/europe/netherlands-260512.osm.pbf
 echo netherlands-260512.osm.pbf > names/geofabrik-netherlands
-[ -f "$CACHE/luxembourg-260512.osm.pbf" ] || wcurl -o $CACHE/luxembourg-260512.osm.pbf https://download.geofabrik.de/europe/luxembourg-260512.osm.pbf
-echo luxembourg-260512.osm.pbf > names/geofabrik-luxembourg
+[ -f "$CACHE/luxembourg-260513.osm.pbf" ] || wcurl -o $CACHE/luxembourg-260513.osm.pbf https://download.geofabrik.de/europe/luxembourg-260513.osm.pbf
+echo luxembourg-260513.osm.pbf > names/geofabrik-luxembourg
 [ -f "$CACHE/bounds-20260508.zip" ] || wcurl -o $CACHE/bounds-20260508.zip http://osm.thkukuk.de/data/bounds-20260508.zip
 echo bounds-20260508.zip > names/bounds
 [ -f "$CACHE/sea-20260502220000.zip" ] || wcurl -o $CACHE/sea-20260502220000.zip http://osm.thkukuk.de/data/sea-20260502220000.zip
@@ -32,8 +32,8 @@ echo 5c4402-62ed305a14a16.zip > names/Hoehendaten_Freizeitkarte_BEL
 echo 3d557b-62ed30b3b735d.zip > names/Hoehendaten_Freizeitkarte_NLD
 [ -f "$CACHE/17dc23-62ed30c666547.zip" ] || wcurl -o $CACHE/17dc23-62ed30c666547.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
 echo 17dc23-62ed30c666547.zip > names/Hoehendaten_Freizeitkarte_LUX
-[ -f "$CACHE/31e0a9-651a8f7b6eac5.zip" ] || wcurl -o $CACHE/31e0a9-651a8f7b6eac5.zip http://download.geonames.org/export/dump/cities15000.zip
-echo 31e0a9-651a8f7b6eac5.zip > names/cities15000
+[ -f "$CACHE/31ea5e-651bd12bb86af.zip" ] || wcurl -o $CACHE/31ea5e-651bd12bb86af.zip http://download.geonames.org/export/dump/cities15000.zip
+echo 31ea5e-651bd12bb86af.zip > names/cities15000
 MERGED=$(cat \
   $CACHE/$(< names/osmosis) \
   $CACHE/$(< names/geofabrik-belgium) \
