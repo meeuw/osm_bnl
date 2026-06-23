@@ -28,8 +28,8 @@ jobs:
       - id: geofabrik-luxembourg
         uses: ./.github/actions/cached-download
         with:
-          filename: luxembourg-260621.osm.pbf
-          url: https://download.geofabrik.de/europe/luxembourg-260621.osm.pbf
+          filename: luxembourg-260622.osm.pbf
+          url: https://download.geofabrik.de/europe/luxembourg-260622.osm.pbf
       - id: bounds
         uses: ./.github/actions/cached-download
         with:
@@ -83,7 +83,7 @@ jobs:
       - id: cities15000
         uses: ./.github/actions/cached-download
         with:
-          filename: 321e72-654cd9d77db13.zip
+          filename: 321ec6-654e2907eb382.zip
           url: http://download.geonames.org/export/dump/cities15000.zip
       - uses: actions/setup-java@v3
         with:
