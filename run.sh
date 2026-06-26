@@ -10,8 +10,8 @@ echo belgium-260625.osm.pbf > names/geofabrik-belgium
 echo netherlands-260625.osm.pbf > names/geofabrik-netherlands
 [ -f "$CACHE/luxembourg-260625.osm.pbf" ] || wcurl -o $CACHE/luxembourg-260625.osm.pbf https://download.geofabrik.de/europe/luxembourg-260625.osm.pbf
 echo luxembourg-260625.osm.pbf > names/geofabrik-luxembourg
-[ -f "$CACHE/bounds-20260619.zip" ] || wcurl -o $CACHE/bounds-20260619.zip http://osm.thkukuk.de/data/bounds-20260619.zip
-echo bounds-20260619.zip > names/bounds
+[ -f "$CACHE/bounds-20260626.zip" ] || wcurl -o $CACHE/bounds-20260626.zip http://osm.thkukuk.de/data/bounds-20260626.zip
+echo bounds-20260626.zip > names/bounds
 [ -f "$CACHE/mkgmap-r4924.zip" ] || wcurl -o $CACHE/mkgmap-r4924.zip https://www.mkgmap.org.uk/download/mkgmap-r4924.zip
 echo mkgmap-r4924.zip > names/mkgmap
 [ -f "$CACHE/splitter-r654.zip" ] || wcurl -o $CACHE/splitter-r654.zip https://www.mkgmap.org.uk/download/splitter-r654.zip

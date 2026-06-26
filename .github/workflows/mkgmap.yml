@@ -33,8 +33,8 @@ jobs:
       - id: bounds
         uses: ./.github/actions/cached-download
         with:
-          filename: bounds-20260619.zip
-          url: http://osm.thkukuk.de/data/bounds-20260619.zip
+          filename: bounds-20260626.zip
+          url: http://osm.thkukuk.de/data/bounds-20260626.zip
       - id: mkgmap
         uses: ./.github/actions/cached-download
         with:
