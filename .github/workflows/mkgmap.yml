@@ -35,6 +35,11 @@ jobs:
         with:
           filename: bounds-20260626.zip
           url: http://osm.thkukuk.de/data/bounds-20260626.zip
+      - id: sea
+        uses: ./.github/actions/cached-download
+        with:
+          filename: sea-20260502220000.zip
+          url: http://osm.thkukuk.de/data/sea-20260502220000.zip
       - id: mkgmap
         uses: ./.github/actions/cached-download
         with:

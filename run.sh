@@ -12,6 +12,8 @@ echo netherlands-260626.osm.pbf > names/geofabrik-netherlands
 echo luxembourg-260626.osm.pbf > names/geofabrik-luxembourg
 [ -f "$CACHE/bounds-20260626.zip" ] || wcurl -o $CACHE/bounds-20260626.zip http://osm.thkukuk.de/data/bounds-20260626.zip
 echo bounds-20260626.zip > names/bounds
+[ -f "$CACHE/sea-20260502220000.zip" ] || wcurl -o $CACHE/sea-20260502220000.zip http://osm.thkukuk.de/data/sea-20260502220000.zip
+echo sea-20260502220000.zip > names/sea
 [ -f "$CACHE/mkgmap-r4924.zip" ] || wcurl -o $CACHE/mkgmap-r4924.zip https://www.mkgmap.org.uk/download/mkgmap-r4924.zip
 echo mkgmap-r4924.zip > names/mkgmap
 [ -f "$CACHE/splitter-r654.zip" ] || wcurl -o $CACHE/splitter-r654.zip https://www.mkgmap.org.uk/download/splitter-r654.zip
