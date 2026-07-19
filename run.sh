@@ -4,12 +4,12 @@ mkdir -p names
 
 [ -f "$CACHE/osmosis-0.49.2.zip" ] || wcurl -o $CACHE/osmosis-0.49.2.zip https://github.com/openstreetmap/osmosis/releases/download/0.49.2/osmosis-0.49.2.zip
 echo osmosis-0.49.2.zip > names/osmosis
-[ -f "$CACHE/belgium-260717.osm.pbf" ] || wcurl -o $CACHE/belgium-260717.osm.pbf https://download.geofabrik.de/europe/belgium-260717.osm.pbf
-echo belgium-260717.osm.pbf > names/geofabrik-belgium
-[ -f "$CACHE/netherlands-260717.osm.pbf" ] || wcurl -o $CACHE/netherlands-260717.osm.pbf https://download.geofabrik.de/europe/netherlands-260717.osm.pbf
-echo netherlands-260717.osm.pbf > names/geofabrik-netherlands
-[ -f "$CACHE/luxembourg-260717.osm.pbf" ] || wcurl -o $CACHE/luxembourg-260717.osm.pbf https://download.geofabrik.de/europe/luxembourg-260717.osm.pbf
-echo luxembourg-260717.osm.pbf > names/geofabrik-luxembourg
+[ -f "$CACHE/belgium-260718.osm.pbf" ] || wcurl -o $CACHE/belgium-260718.osm.pbf https://download.geofabrik.de/europe/belgium-260718.osm.pbf
+echo belgium-260718.osm.pbf > names/geofabrik-belgium
+[ -f "$CACHE/netherlands-260718.osm.pbf" ] || wcurl -o $CACHE/netherlands-260718.osm.pbf https://download.geofabrik.de/europe/netherlands-260718.osm.pbf
+echo netherlands-260718.osm.pbf > names/geofabrik-netherlands
+[ -f "$CACHE/luxembourg-260718.osm.pbf" ] || wcurl -o $CACHE/luxembourg-260718.osm.pbf https://download.geofabrik.de/europe/luxembourg-260718.osm.pbf
+echo luxembourg-260718.osm.pbf > names/geofabrik-luxembourg
 [ -f "$CACHE/bounds-20260717.zip" ] || wcurl -o $CACHE/bounds-20260717.zip http://osm.thkukuk.de/data/bounds-20260717.zip
 echo bounds-20260717.zip > names/bounds
 [ -f "$CACHE/sea-20260717080000.zip" ] || wcurl -o $CACHE/sea-20260717080000.zip http://osm.thkukuk.de/data/sea-20260717080000.zip
@@ -32,8 +32,8 @@ echo 5c4402-62ed305a14a16.zip > names/Hoehendaten_Freizeitkarte_BEL
 echo 3d557b-62ed30b3b735d.zip > names/Hoehendaten_Freizeitkarte_NLD
 [ -f "$CACHE/17dc23-62ed30c666547.zip" ] || wcurl -o $CACHE/17dc23-62ed30c666547.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
 echo 17dc23-62ed30c666547.zip > names/Hoehendaten_Freizeitkarte_LUX
-[ -f "$CACHE/325a4c-656d8a3fe3b91.zip" ] || wcurl -o $CACHE/325a4c-656d8a3fe3b91.zip http://download.geonames.org/export/dump/cities15000.zip
-echo 325a4c-656d8a3fe3b91.zip > names/cities15000
+[ -f "$CACHE/325cd4-656ed4e63ce60.zip" ] || wcurl -o $CACHE/325cd4-656ed4e63ce60.zip http://download.geonames.org/export/dump/cities15000.zip
+echo 325cd4-656ed4e63ce60.zip > names/cities15000
 MERGED=$(cat \
   $CACHE/$(< names/osmosis) \
   $CACHE/$(< names/geofabrik-belgium) \
