@@ -4,14 +4,14 @@ mkdir -p names
 
 [ -f "$CACHE/osmosis-0.49.2.zip" ] || wcurl -o $CACHE/osmosis-0.49.2.zip https://github.com/openstreetmap/osmosis/releases/download/0.49.2/osmosis-0.49.2.zip
 echo osmosis-0.49.2.zip > names/osmosis
-[ -f "$CACHE/belgium-260812.osm.pbf" ] || wcurl -o $CACHE/belgium-260812.osm.pbf https://download.geofabrik.de/europe/belgium-260812.osm.pbf
-echo belgium-260812.osm.pbf > names/geofabrik-belgium
+[ -f "$CACHE/belgium-260813.osm.pbf" ] || wcurl -o $CACHE/belgium-260813.osm.pbf https://download.geofabrik.de/europe/belgium-260813.osm.pbf
+echo belgium-260813.osm.pbf > names/geofabrik-belgium
 [ -f "$CACHE/netherlands-260813.osm.pbf" ] || wcurl -o $CACHE/netherlands-260813.osm.pbf https://download.geofabrik.de/europe/netherlands-260813.osm.pbf
 echo netherlands-260813.osm.pbf > names/geofabrik-netherlands
-[ -f "$CACHE/luxembourg-260813.osm.pbf" ] || wcurl -o $CACHE/luxembourg-260813.osm.pbf https://download.geofabrik.de/europe/luxembourg-260813.osm.pbf
-echo luxembourg-260813.osm.pbf > names/geofabrik-luxembourg
-[ -f "$CACHE/bounds-20260807.zip" ] || wcurl -o $CACHE/bounds-20260807.zip http://osm.thkukuk.de/data/bounds-20260807.zip
-echo bounds-20260807.zip > names/bounds
+[ -f "$CACHE/luxembourg-260814.osm.pbf" ] || wcurl -o $CACHE/luxembourg-260814.osm.pbf https://download.geofabrik.de/europe/luxembourg-260814.osm.pbf
+echo luxembourg-260814.osm.pbf > names/geofabrik-luxembourg
+[ -f "$CACHE/bounds-20260814.zip" ] || wcurl -o $CACHE/bounds-20260814.zip http://osm.thkukuk.de/data/bounds-20260814.zip
+echo bounds-20260814.zip > names/bounds
 [ -f "$CACHE/sea-20260810220000.zip" ] || wcurl -o $CACHE/sea-20260810220000.zip http://osm.thkukuk.de/data/sea-20260810220000.zip
 echo sea-20260810220000.zip > names/sea
 [ -f "$CACHE/mkgmap-r4924.zip" ] || wcurl -o $CACHE/mkgmap-r4924.zip https://www.mkgmap.org.uk/download/mkgmap-r4924.zip

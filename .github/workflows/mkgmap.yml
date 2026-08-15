@@ -18,8 +18,8 @@ jobs:
       - id: geofabrik-belgium
         uses: ./.github/actions/cached-download
         with:
-          filename: belgium-260812.osm.pbf
-          url: https://download.geofabrik.de/europe/belgium-260812.osm.pbf
+          filename: belgium-260813.osm.pbf
+          url: https://download.geofabrik.de/europe/belgium-260813.osm.pbf
       - id: geofabrik-netherlands
         uses: ./.github/actions/cached-download
         with:
@@ -28,13 +28,13 @@ jobs:
       - id: geofabrik-luxembourg
         uses: ./.github/actions/cached-download
         with:
-          filename: luxembourg-260813.osm.pbf
-          url: https://download.geofabrik.de/europe/luxembourg-260813.osm.pbf
+          filename: luxembourg-260814.osm.pbf
+          url: https://download.geofabrik.de/europe/luxembourg-260814.osm.pbf
       - id: bounds
         uses: ./.github/actions/cached-download
         with:
-          filename: bounds-20260807.zip
-          url: http://osm.thkukuk.de/data/bounds-20260807.zip
+          filename: bounds-20260814.zip
+          url: http://osm.thkukuk.de/data/bounds-20260814.zip
       - id: sea
         uses: ./.github/actions/cached-download
         with:
