@@ -4,16 +4,16 @@ mkdir -p names
 
 [ -f "$CACHE/osmosis-0.49.2.zip" ] || wcurl -o $CACHE/osmosis-0.49.2.zip https://github.com/openstreetmap/osmosis/releases/download/0.49.2/osmosis-0.49.2.zip
 echo osmosis-0.49.2.zip > names/osmosis
-[ -f "$CACHE/belgium-260819.osm.pbf" ] || wcurl -o $CACHE/belgium-260819.osm.pbf https://download.geofabrik.de/europe/belgium-260819.osm.pbf
-echo belgium-260819.osm.pbf > names/geofabrik-belgium
-[ -f "$CACHE/netherlands-260819.osm.pbf" ] || wcurl -o $CACHE/netherlands-260819.osm.pbf https://download.geofabrik.de/europe/netherlands-260819.osm.pbf
-echo netherlands-260819.osm.pbf > names/geofabrik-netherlands
-[ -f "$CACHE/luxembourg-260819.osm.pbf" ] || wcurl -o $CACHE/luxembourg-260819.osm.pbf https://download.geofabrik.de/europe/luxembourg-260819.osm.pbf
-echo luxembourg-260819.osm.pbf > names/geofabrik-luxembourg
+[ -f "$CACHE/belgium-260820.osm.pbf" ] || wcurl -o $CACHE/belgium-260820.osm.pbf https://download.geofabrik.de/europe/belgium-260820.osm.pbf
+echo belgium-260820.osm.pbf > names/geofabrik-belgium
+[ -f "$CACHE/netherlands-260820.osm.pbf" ] || wcurl -o $CACHE/netherlands-260820.osm.pbf https://download.geofabrik.de/europe/netherlands-260820.osm.pbf
+echo netherlands-260820.osm.pbf > names/geofabrik-netherlands
+[ -f "$CACHE/luxembourg-260820.osm.pbf" ] || wcurl -o $CACHE/luxembourg-260820.osm.pbf https://download.geofabrik.de/europe/luxembourg-260820.osm.pbf
+echo luxembourg-260820.osm.pbf > names/geofabrik-luxembourg
 [ -f "$CACHE/bounds-20260814.zip" ] || wcurl -o $CACHE/bounds-20260814.zip http://osm.thkukuk.de/data/bounds-20260814.zip
 echo bounds-20260814.zip > names/bounds
-[ -f "$CACHE/sea-20260818220000.zip" ] || wcurl -o $CACHE/sea-20260818220000.zip http://osm.thkukuk.de/data/sea-20260818220000.zip
-echo sea-20260818220000.zip > names/sea
+[ -f "$CACHE/sea-20260819220000.zip" ] || wcurl -o $CACHE/sea-20260819220000.zip http://osm.thkukuk.de/data/sea-20260819220000.zip
+echo sea-20260819220000.zip > names/sea
 [ -f "$CACHE/mkgmap-r4924.zip" ] || wcurl -o $CACHE/mkgmap-r4924.zip https://www.mkgmap.org.uk/download/mkgmap-r4924.zip
 echo mkgmap-r4924.zip > names/mkgmap
 [ -f "$CACHE/splitter-r654.zip" ] || wcurl -o $CACHE/splitter-r654.zip https://www.mkgmap.org.uk/download/splitter-r654.zip
@@ -32,8 +32,8 @@ echo 5c4402-62ed305a14a16.zip > names/Hoehendaten_Freizeitkarte_BEL
 echo 3d557b-62ed30b3b735d.zip > names/Hoehendaten_Freizeitkarte_NLD
 [ -f "$CACHE/17dc23-62ed30c666547.zip" ] || wcurl -o $CACHE/17dc23-62ed30c666547.zip http://develop.freizeitkarte-osm.de/ele_20_100_500/Hoehendaten_Freizeitkarte_LUX.osm.pbf
 echo 17dc23-62ed30c666547.zip > names/Hoehendaten_Freizeitkarte_LUX
-[ -f "$CACHE/327468-65970ccb25bfc.zip" ] || wcurl -o $CACHE/327468-65970ccb25bfc.zip http://download.geonames.org/export/dump/cities15000.zip
-echo 327468-65970ccb25bfc.zip > names/cities15000
+[ -f "$CACHE/3274f3-65984e863e816.zip" ] || wcurl -o $CACHE/3274f3-65984e863e816.zip http://download.geonames.org/export/dump/cities15000.zip
+echo 3274f3-65984e863e816.zip > names/cities15000
 MERGED=$(cat \
   $CACHE/$(< names/osmosis) \
   $CACHE/$(< names/geofabrik-belgium) \
