@@ -33,13 +33,13 @@ jobs:
       - id: bounds
         uses: ./.github/actions/cached-download
         with:
-          filename: bounds-20260814.zip
-          url: http://osm.thkukuk.de/data/bounds-20260814.zip
+          filename: bounds-20260821.zip
+          url: http://osm.thkukuk.de/data/bounds-20260821.zip
       - id: sea
         uses: ./.github/actions/cached-download
         with:
-          filename: sea-20260819220000.zip
-          url: http://osm.thkukuk.de/data/sea-20260819220000.zip
+          filename: sea-20260820220000.zip
+          url: http://osm.thkukuk.de/data/sea-20260820220000.zip
       - id: mkgmap
         uses: ./.github/actions/cached-download
         with:
@@ -88,7 +88,7 @@ jobs:
       - id: cities15000
         uses: ./.github/actions/cached-download
         with:
-          filename: 3274f3-65984e863e816.zip
+          filename: 3274f5-65998fcc375dc.zip
           url: http://download.geonames.org/export/dump/cities15000.zip
       - uses: actions/setup-java@v3
         with:
