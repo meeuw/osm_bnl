@@ -4,16 +4,16 @@ mkdir -p names
 
 [ -f "$CACHE/osmosis-0.49.2.zip" ] || wcurl -o $CACHE/osmosis-0.49.2.zip https://github.com/openstreetmap/osmosis/releases/download/0.49.2/osmosis-0.49.2.zip
 echo osmosis-0.49.2.zip > names/osmosis
-[ -f "$CACHE/belgium-261023.osm.pbf" ] || wcurl -o $CACHE/belgium-261023.osm.pbf https://download.geofabrik.de/europe/belgium-261023.osm.pbf
-echo belgium-261023.osm.pbf > names/geofabrik-belgium
-[ -f "$CACHE/netherlands-261023.osm.pbf" ] || wcurl -o $CACHE/netherlands-261023.osm.pbf https://download.geofabrik.de/europe/netherlands-261023.osm.pbf
-echo netherlands-261023.osm.pbf > names/geofabrik-netherlands
-[ -f "$CACHE/luxembourg-261023.osm.pbf" ] || wcurl -o $CACHE/luxembourg-261023.osm.pbf https://download.geofabrik.de/europe/luxembourg-261023.osm.pbf
-echo luxembourg-261023.osm.pbf > names/geofabrik-luxembourg
+[ -f "$CACHE/belgium-261024.osm.pbf" ] || wcurl -o $CACHE/belgium-261024.osm.pbf https://download.geofabrik.de/europe/belgium-261024.osm.pbf
+echo belgium-261024.osm.pbf > names/geofabrik-belgium
+[ -f "$CACHE/netherlands-261024.osm.pbf" ] || wcurl -o $CACHE/netherlands-261024.osm.pbf https://download.geofabrik.de/europe/netherlands-261024.osm.pbf
+echo netherlands-261024.osm.pbf > names/geofabrik-netherlands
+[ -f "$CACHE/luxembourg-261024.osm.pbf" ] || wcurl -o $CACHE/luxembourg-261024.osm.pbf https://download.geofabrik.de/europe/luxembourg-261024.osm.pbf
+echo luxembourg-261024.osm.pbf > names/geofabrik-luxembourg
 [ -f "$CACHE/bounds-20261023.zip" ] || wcurl -o $CACHE/bounds-20261023.zip http://osm.thkukuk.de/data/bounds-20261023.zip
 echo bounds-20261023.zip > names/bounds
-[ -f "$CACHE/sea-20261022220000.zip" ] || wcurl -o $CACHE/sea-20261022220000.zip http://osm.thkukuk.de/data/sea-20261022220000.zip
-echo sea-20261022220000.zip > names/sea
+[ -f "$CACHE/sea-20261023220000.zip" ] || wcurl -o $CACHE/sea-20261023220000.zip http://osm.thkukuk.de/data/sea-20261023220000.zip
+echo sea-20261023220000.zip > names/sea
 [ -f "$CACHE/mkgmap-r4924.zip" ] || wcurl -o $CACHE/mkgmap-r4924.zip https://www.mkgmap.org.uk/download/mkgmap-r4924.zip
 echo mkgmap-r4924.zip > names/mkgmap
 [ -f "$CACHE/splitter-r654.zip" ] || wcurl -o $CACHE/splitter-r654.zip https://www.mkgmap.org.uk/download/splitter-r654.zip
