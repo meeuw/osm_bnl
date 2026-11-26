@@ -18,28 +18,28 @@ jobs:
       - id: geofabrik-belgium
         uses: ./.github/actions/cached-download
         with:
-          filename: belgium-261118.osm.pbf
-          url: https://download.geofabrik.de/europe/belgium-261118.osm.pbf
+          filename: belgium-261126.osm.pbf
+          url: https://download.geofabrik.de/europe/belgium-261126.osm.pbf
       - id: geofabrik-netherlands
         uses: ./.github/actions/cached-download
         with:
-          filename: netherlands-261118.osm.pbf
-          url: https://download.geofabrik.de/europe/netherlands-261118.osm.pbf
+          filename: netherlands-261126.osm.pbf
+          url: https://download.geofabrik.de/europe/netherlands-261126.osm.pbf
       - id: geofabrik-luxembourg
         uses: ./.github/actions/cached-download
         with:
-          filename: luxembourg-261118.osm.pbf
-          url: https://download.geofabrik.de/europe/luxembourg-261118.osm.pbf
+          filename: luxembourg-261126.osm.pbf
+          url: https://download.geofabrik.de/europe/luxembourg-261126.osm.pbf
       - id: bounds
         uses: ./.github/actions/cached-download
         with:
-          filename: bounds-20261113.zip
-          url: http://osm.thkukuk.de/data/bounds-20261113.zip
+          filename: bounds-20261120.zip
+          url: http://osm.thkukuk.de/data/bounds-20261120.zip
       - id: sea
         uses: ./.github/actions/cached-download
         with:
-          filename: sea-20261117230000.zip
-          url: http://osm.thkukuk.de/data/sea-20261117230000.zip
+          filename: sea-20261124230000.zip
+          url: http://osm.thkukuk.de/data/sea-20261124230000.zip
       - id: mkgmap
         uses: ./.github/actions/cached-download
         with:
@@ -88,7 +88,7 @@ jobs:
       - id: cities15000
         uses: ./.github/actions/cached-download
         with:
-          filename: 336766-660983803304b.zip
+          filename: 3367c7-661251c3d73c2.zip
           url: http://download.geonames.org/export/dump/cities15000.zip
       - uses: actions/setup-java@v3
         with:
